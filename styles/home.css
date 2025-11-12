@@ -25,16 +25,12 @@ body {
 
 .links-header {
     display: flex;
-    
-}
-
-.header .links-header {
-    display: flex;
     justify-content: space-between;
     text-decoration: none;
 }
 
 .nav-bar {
+    width: 25vw;
     padding: 2rem;
     display: flex;
     justify-content: space-evenly;
