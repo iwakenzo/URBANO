@@ -53,6 +53,21 @@ body {
 }
 
 .homepage .background img {
-    height: 80vh;
+    height: 86vh;
     
+}
+
+.homepage2 .background2 {
+    height: 100vh;
+    background-color: #31802B;
+}
+
+.homepage2 .container {
+    height: 20vh;
+}
+
+.title {
+    font-family: "Cherry Bomb One", system-ui;
+    color: #F8F6EB;
+    font-size: 60px
 }
