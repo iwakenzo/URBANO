@@ -3,9 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>URBANO. | LOGIN.</title>
+    <link rel="stylesheet" href="./styles/login.css">
+     <!-- Fontes utilizadas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="home.html"><img width="315" height="93" src="../assets/logo_alt.png" alt="logo do site"></a>
+                <p class="subtitle">COOL KIDS DISCOVER <br> THEMSELVES.</p>
+            </div>
+        <div class="links-header">
+            <nav class="nav-bar">
+                <input type="checkbox" id="burger" onchange="burger_menu()">
+                <label class="burger" for="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <div class="offscreenmenu">
+                    <ul>
+                        <li> <a class="menu_item" href="">LOGIN</a></li>
+                        <li> <a class="menu_item" href="./signup.html">CADASTRE-SE</a></li>
+                        <li> <a class="menu_item" href="./home.html#timelineref">TIMELINE</a></li>
+                        <li> <a class="menu_item" href="./home.html#aboutme">SOBRE MIM</a></li>
+                        <li> <a class="menu_item" href="./home.html#learnmoreref">SAIBA MAIS</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="loginscreen">
+        <div class="background">
+            <img src="../assets/loginpage_background.png" alt="imagem de fundo">
+            <div class="logincard">
+                <div class="content">
+                    <div class="deco">
+                        <div class="welcome-text">
+                            <img src="./assets/welcome_text.png" alt="bem vindo de volta!">
+                        </div>
+                    </div>
+                    <div class="inputs">
+                        <div class="email-here">
+                            <span>E-MAIL:</span><br>
+                            <input type="text" id="input_email" placeholder="INSIRA SEU E-MAIL">
+                        </div>
+                        <div class="password-here">
+                            <span>SENHA:</span><br>
+                            <input type="password" id="input_password" placeholder="INSIRA SUA SENHA">
+                        </div>
+                        <div class="login-button">
+                            <button onclick="login()">ENTRAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

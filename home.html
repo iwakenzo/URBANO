@@ -19,7 +19,7 @@
                 <a href="home.html"><img width="315" height="93" src="../assets/logo.png" alt="logo do site"></a>
                 <p class="subtitle">COOL KIDS DISCOVER <br> THEMSELVES.</p>
             </div>
-            <div class="links-header">
+        <div class="links-header">
             <nav class="nav-bar">
                 <span>
                     <a href="./login.html">LOGIN</a>
@@ -27,21 +27,22 @@
                 <span>
                     <a href="./signup.html">CADASTRE-SE</a>
                 </span>
+                <input type="checkbox" id="burger" onchange="burger_menu()">
                 <label class="burger" for="burger">
-                    <input type="checkbox" id="burger" onactivate="burger_menu()">
                     <span></span>
                     <span></span>
                     <span></span>
-                    <div class="offscreenmenu">
-                        <ul>
-                            <li> <a class="menu_item" href="#">SOBRE MIM</a></li>
-                            <li> <a class="menu_item" href="#timelineref">TIMELINE</a></li>
-                            <li> <a class="menu_item" href="#">SAIBA MAIS</a></li>
-                        </ul>
-                    </div>
                 </label>
+                <div class="offscreenmenu">
+                    <ul>
+                        <li> <a class="menu_item" href="#">SOBRE MIM</a></li>
+                        <li> <a class="menu_item" href="#timelineref">TIMELINE</a></li>
+                        <li> <a class="menu_item" href="#">SAIBA MAIS</a></li>
+                    </ul>
+                </div>
             </nav>
         </div>
+    </div>
     </div>
     <div class="homepage">
         <div class="background">
@@ -56,7 +57,7 @@
             </div>
         </div>
     </div>
-    <div class="homepage3">
+    <div class="homepage3" id="aboutme">
         <div class="container3">
             <div class="logo3">
                 <span class="title3">SOBRE MIM.</span>
@@ -94,9 +95,3 @@
     </div>
 </body>
 </html>
-<script>
-    function burger_menu() {
-
-    }
-
-</script>
