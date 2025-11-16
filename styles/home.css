@@ -13,10 +13,10 @@ body {
 }
 
 .logo {
-    margin-left: 2vh;
+    margin-left: 4vh;
 }
 
-.logo p {
+.logo .subtitle {
     margin-top: -5px;
     color: #31802B;
     font-family: urbanist;
@@ -46,6 +46,112 @@ body {
     color: #31802B;
 }
 
+.burger {
+    position: relative;
+    width: 40px;
+    height: 30px;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+}
+
+.burger input {
+    display: none;
+}
+
+.burger span {
+    margin-top: 15px;
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #31802B;
+    border-radius: 9px;
+    opacity: 1;
+    transition: .25s ease-in-out;
+    z-index: 1001;
+}
+
+.burger span:nth-of-type(1) {
+    top: 0px;
+    transform-origin: left center;
+}
+
+.burger span:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: left center;
+}
+
+.burger span:nth-of-type(3) {
+    top: 100%;
+    transform-origin: left center;
+    transform: translateY(-100%);
+}
+
+.burger input:checked ~ span:nth-of-type(1) {
+    transform: rotate(45deg);
+    top: 0px;
+    left: 5px;
+}
+
+.burger input:checked ~ span:nth-of-type(2) {
+    width: 0%;
+    opacity: 0;
+}
+
+.burger input:checked ~ span:nth-of-type(3) {
+    transform: rotate(-45deg);
+    top: 28px;
+    left: 5px;
+}
+
+.burger input:checked ~ span {
+    background-color: #F8F6EB;
+}
+
+.burger input:checked ~ .offscreenmenu {
+    transform: translateX(0);
+}
+
+.offscreenmenu {
+    background-color: #31802B;
+    box-shadow: 10px;
+    height: 100%;
+    width: 25vw;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3rem;
+    transition: transform .3s ease;
+    transform: translateX(100%);
+    z-index: 1000;
+}
+
+.offscreenmenu ul {
+    margin-bottom: 45rem;
+    margin-right: 10rem;
+}
+
+.offscreenmenu li {
+    display: flex;
+    list-style: none;
+    margin-top: 4vh;
+}
+
+.offscreenmenu li a {
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 45px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
 .homepage .background {
     display: flex;
     align-items: center;
@@ -57,17 +163,112 @@ body {
     
 }
 
-.homepage2 .background2 {
-    height: 100vh;
+.homepage2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #31802B;
+    height: 100vh;
 }
 
-.homepage2 .container {
-    height: 20vh;
+.homepage2 .container2 {
+    display: flex;
+    align-items: flex-start;
+    height: 97vh;
+    width: 96vw;
+
 }
 
-.title {
+.logo2 .title2 {
     font-family: "Cherry Bomb One", system-ui;
     color: #F8F6EB;
     font-size: 60px
+}
+
+.logo2 .subtitle2 {
+    margin-top: -2px;
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.homepage3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #191413;
+    height: 100vh;
+}
+
+.homepage3 .container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 97vh;
+    width: 96vw;
+
+}
+
+.content3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.logo3 {
+    width: 100%;
+}
+
+.logo3 .title3 {
+    font-family: "Cherry Bomb One", system-ui;
+    color: #E09034;
+    font-size: 60px
+}
+
+.logo3 .subtitle3 {
+    margin-top: -2px;
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.aboutme {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 70vh;
+    width: 100%;
+}
+
+.text1 {
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 25px;
+    font-weight: 400;
+    width: 20vw;
+    text-align: justify;
+}
+
+.text2 {
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 25px;
+    font-weight: 400;
+    width: 20vw;
+    text-align: justify;
+}
+
+.text3 {
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 25px;
+    font-weight: 400;
+    width: 20vw;
+    text-align: justify;
 }

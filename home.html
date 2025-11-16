@@ -16,8 +16,8 @@
     <div class="header">
         <div class="container">
             <div class="logo">
-                <a href="home.html"><img width="315" height="93" src="../URBANO/assets/logo.png" alt="logo do site"></a>
-                <p>COOL KIDS DISCOVER <br> THEMSELVES.</p>
+                <a href="home.html"><img width="315" height="93" src="../assets/logo.png" alt="logo do site"></a>
+                <p class="subtitle">COOL KIDS DISCOVER <br> THEMSELVES.</p>
             </div>
             <div class="links-header">
             <nav class="nav-bar">
@@ -27,26 +27,76 @@
                 <span>
                     <a href="./signup.html">CADASTRE-SE</a>
                 </span>
-                <div class="burger-menu">
+                <label class="burger" for="burger">
+                    <input type="checkbox" id="burger" onactivate="burger_menu()">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                    <div class="offscreenmenu">
+                        <ul>
+                            <li> <a class="menu_item" href="#">SOBRE MIM</a></li>
+                            <li> <a class="menu_item" href="#timelineref">TIMELINE</a></li>
+                            <li> <a class="menu_item" href="#">SAIBA MAIS</a></li>
+                        </ul>
+                    </div>
+                </label>
             </nav>
         </div>
     </div>
     <div class="homepage">
         <div class="background">
-            <img src="../URBANO/assets/homepage_background.png" alt="imagem de fundo">
+            <img src="../assets/homepage_background.png" alt="imagem de fundo">
         </div>
     </div>
-    <div class="homepage2">
-        <div class="background2">
-            <div class="container">
-                <span class="title">TIMELINE.</span>
+    <div class="homepage2" id="timelineref">
+        <div class="container2">
+            <div class="logo2">
+                <span class="title2">TIMELINE.</span>
+                <p class="subtitle2">DE ONDE A MODA SURGE? <br> QUAIS SEUS IMPACTOS?</p> 
             </div>
         </div>
     </div>
-    
+    <div class="homepage3">
+        <div class="container3">
+            <div class="logo3">
+                <span class="title3">SOBRE MIM.</span>
+                <p class="subtitle3">POR QUE MODA?</p>
+            </div>
+            <div class="content3">
+                <div class="aboutme">
+                    <div class="text1">
+                        <span>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Fusce in tempor turpis. Quisque vel congue sapien. 
+                            Aliquam tempus venenatis blandit. 
+                            Etiam maximus, eros vel cursus lacinia, libero purus auctor nunc, sed convallis augue lectus eu odio.
+                        </span>
+                    </div>  
+                    <div class="text2">
+                        <span>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Fusce in tempor turpis. Quisque vel congue sapien. 
+                            Aliquam tempus venenatis blandit. 
+                            Etiam maximus, eros vel cursus lacinia, libero purus auctor nunc, sed convallis augue lectus eu odio. 
+                        </span>
+                    </div>
+                    <div class="text3">
+                        <span>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                            Fusce in tempor turpis. Quisque vel congue sapien. 
+                            Aliquam tempus venenatis blandit. 
+                            Etiam maximus, eros vel cursus lacinia, libero purus auctor nunc, sed convallis augue lectus eu odio.
+                        </span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+<script>
+    function burger_menu() {
+
+    }
+
+</script>
