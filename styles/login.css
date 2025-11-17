@@ -198,7 +198,7 @@ input#burger:checked ~ label.burger {
     font-weight: 400;
     font-size: 24px;
     padding-left: 9vw;
-    height: 19.531vw;
+    height: 22.531vw;
 }
 
 .inputs input {
@@ -234,7 +234,7 @@ input:focus::placeholder {
 }
 
 .email-here span {
-    height: 4vh;
+    height: 1vh;
     margin-left: 1vw;
 }
 
@@ -246,11 +246,12 @@ input:focus::placeholder {
 }
 
 .password-here span{
-    height: 4vh;
+    height: 1vh;
     margin-left: 1vw;
 }
 
 .login-button {
+    width: 10vw;
     margin-top: 4vh;
 }
 
@@ -268,4 +269,20 @@ input:focus::placeholder {
     border-radius: 15px;
     border: none;
     cursor: pointer;
+}
+
+.no-acc-signup {
+    width: 20vw;
+    font-size: 17px;
+    font-weight: 400;
+    display: flex;
+}
+
+.signup-text {
+    width: 20vw;
+}
+
+.signup-now {
+    width: 15vw;
+    color: #191413;
 }
