@@ -146,7 +146,7 @@ input#burger:checked ~ label.burger {
 
 .offscreenmenu ul {
     width: 20vw;
-    margin-bottom: 53vh;
+    margin-bottom: 68.2vh;
     margin-right: 10rem;
 }
 
@@ -169,7 +169,7 @@ input#burger:checked ~ label.burger {
 }
 
 .loginscreen .background img {
-    height: 83.2vh;
+    height: 83.1vh;
     padding-right: 61px;
 }
 
@@ -185,20 +185,23 @@ input#burger:checked ~ label.burger {
 
 .logincard .content {
     width: 34.167vw;
-    height: 36.135vw;
+    height: 69.3vh;
 }
 
 .content .welcome-text img {
-    height: 16.042vw;
+    height: 30.8vh;
 }
 
 .inputs {
+    display: flex;
+    flex-direction: column;
     color: #F8F6EB;
     font-family: urbanist;
     font-weight: 400;
     font-size: 24px;
     padding-left: 9vw;
-    height: 22.531vw;
+    padding-top: 3vh;
+    height: 4.8vw;
 }
 
 .inputs input {
@@ -227,7 +230,6 @@ input:focus::placeholder {
 }
 
 .email-here {
-    height: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -239,23 +241,26 @@ input:focus::placeholder {
 }
 
 .password-here {
-    height: 15vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 
 .password-here span{
+    margin-top: 2vh;
     height: 1vh;
     margin-left: 1vw;
 }
 
-.login-button {
-    width: 10vw;
+.login-session {
+    width: 28vw;
     margin-top: 4vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
 }
 
-.login-button button {
+.login-session button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -272,17 +277,31 @@ input:focus::placeholder {
 }
 
 .no-acc-signup {
-    width: 20vw;
-    font-size: 17px;
+    width: 15vw;
+    height: 4vh;
+    font-size: 15px;
     font-weight: 400;
     display: flex;
+    justify-content: space-evenly;
+    align-self: flex-end;
 }
 
 .signup-text {
-    width: 20vw;
+    width: 9vw;
+    margin-left: 2vh;
 }
 
 .signup-now {
-    width: 15vw;
+    width: 6vw;
+    margin-left: 1vh;
+    font-weight: 800;
+}
+
+.signup-now a {
+    text-decoration: none;
     color: #191413;
+}
+
+.sdg-goals {
+    text-align: justify;
 }

@@ -284,3 +284,18 @@ input#burger:checked ~ label.burger {
     width: 20vw;
     text-align: justify;
 }
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    font-family: urbanist;
+    font-weight: 400;
+    font-size: 18px;
+    font-style: italic;
+    background-color: #F8F6EB;
+    color: #31802B;
+    margin-left: 3vw;
+    margin-right: 3vw;
+    height: 15vh;
+}
