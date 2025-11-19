@@ -166,30 +166,38 @@ input#burger:checked ~ label.burger {
 
 .loginscreen .background {
     display: flex;
+    justify-content: space-between;
 }
 
 .loginscreen .background img {
     height: 83.1vh;
-    padding-right: 61px;
 }
 
 .logincard {
-    width: 42.917vw;
+    width: 58vw;
+    margin-left: 2vw;
     background-color: #E09034;
     border-top-left-radius: 85px;
     border-top-right-radius: 85px;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .logincard .content {
-    width: 34.167vw;
+    display: flex;
+    flex-direction: row;
+    width: 52.2vw;
+    height: 69.3vh;
+    margin-left: 7vw;
+}
+
+.first-time {
+    display: flex;
     height: 69.3vh;
 }
 
-.content .welcome-text img {
-    height: 30.8vh;
+.first-time img {
+    height: 30vh;
 }
 
 .inputs {
@@ -199,13 +207,13 @@ input#burger:checked ~ label.burger {
     font-family: urbanist;
     font-weight: 400;
     font-size: 24px;
-    padding-left: 9vw;
-    padding-top: 3vh;
-    height: 4.8vw;
+    margin-top: 3vh; 
+    width: 34vw;
+    height: 10vh;
 }
 
 .inputs input {
-    width: 21vw;
+    width: 18vw;
     height: 8vh;
     border-style: none;
     border-radius: 15px;
@@ -229,6 +237,17 @@ input:focus::placeholder {
   color: transparent;
 }
 
+.name-here {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.name-here span {
+    height: 4vh;
+    margin-left: 1vw;
+}
+
 .email-here {
     display: flex;
     flex-direction: column;
@@ -236,6 +255,7 @@ input:focus::placeholder {
 }
 
 .email-here span {
+    margin-top: 2vh;
     height: 1vh;
     margin-left: 1vw;
 }
@@ -252,9 +272,13 @@ input:focus::placeholder {
     margin-left: 1vw;
 }
 
+.password-here input {
+    margin-bottom: 3vh;
+}
+
 .login-session {
     width: 28vw;
-    margin-top: 4vh;
+    margin-top: 1vh;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -269,7 +293,7 @@ input:focus::placeholder {
     font-family: urbanist;
     font-weight: 400;
     font-size: 24px;
-    height: 6vh;
+    height: 7vh;
     width: 9vw;
     border-radius: 15px;
     border: none;
@@ -279,8 +303,8 @@ input:focus::placeholder {
 .already-acc-login {
     width: 15vw;
     height: 4vh;
-    margin-left: 10vh;
-    font-size: 17px;
+    margin-left: 3.2vw;
+    font-size: 15px;
     font-weight: 400;
     display: flex;
     justify-content: center;
@@ -288,7 +312,7 @@ input:focus::placeholder {
 }
 
 .login-now {
-    width: 9vw;
+    width: 10vw;
     font-weight: 400;
 }
 
@@ -296,8 +320,4 @@ input:focus::placeholder {
     color: #191413;
     font-weight: 800;
     text-decoration: none;
-}
-
-.sdg-goals {
-    text-align: justify;
 }
