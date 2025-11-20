@@ -299,3 +299,11 @@ input#burger:checked ~ label.burger {
     margin-right: 3vw;
     height: 15vh;
 }
+
+.copyright {
+    height: 3vh;
+}
+
+.social-media {
+    height: 11vh;
+}
