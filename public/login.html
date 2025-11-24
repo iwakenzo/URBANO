@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>URBANO. | LOGIN.</title>
     <link rel="stylesheet" href="./styles/login.css">
+    <script src="./js/sessao.js"></script>
+
      <!-- Fontes utilizadas -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +17,7 @@
     <div class="header">
         <div class="container">
             <div class="logo">
-                <a href="home.html"><img width="315" height="93" src="./assets/logo_alt.png" alt="logo do site"></a>
+                <a href="index.html"><img width="315" height="93" src="./assets/logo_alt.png" alt="logo do site"></a>
                 <p class="subtitle">COOL KIDS DISCOVER <br> THEMSELVES.</p>
             </div>
         <div class="links-header">
@@ -29,9 +31,9 @@
                 <div class="offscreenmenu">
                     <ul>
                         <li> <a class="menu_item" href="./signup.html">CADASTRE-SE</a></li>
-                        <li> <a class="menu_item" href="./home.html#timelineref">TIMELINE</a></li>
-                        <li> <a class="menu_item" href="./home.html#aboutme">SOBRE MIM</a></li>
-                        <li> <a class="menu_item" href="./home.html#learnmoreref">SAIBA MAIS</a></li>
+                        <li> <a class="menu_item" href="./index.html#timelineref">TIMELINE</a></li>
+                        <li> <a class="menu_item" href="./index.html#aboutme">SOBRE MIM</a></li>
+                        <li> <a class="menu_item" href="./index.html#learnmoreref">SAIBA MAIS</a></li>
                     </ul>
                 </div>
             </nav>
@@ -56,6 +58,7 @@
                             <span>SENHA:</span><br>
                             <input type="password" id="input_password" placeholder="INSIRA SUA SENHA">
                         </div>
+                        <div id="error_message" class="error"></div>
                         <div class="login-session">
                             <button onclick="login()">ENTRAR</button>
                             <div class="no-acc-signup">
@@ -74,3 +77,71 @@
     </div>
 </body>
 </html>
+<script>
+
+    function login() {
+
+        var email = input_email.value;
+        var password = input_password.value;
+
+        if (email == "" || password == "") {
+            cardErro.style.display = "block"
+            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            return false;
+        }
+        else {
+            setInterval(sumirMensagem, 5000)
+        }
+
+        console.log("FORM LOGIN: ", email);
+        console.log("FORM SENHA: ", password);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: password
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+
+                    setTimeout(function () {
+                        window.location = "./dashboard.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none"
+    }
+
+</script>

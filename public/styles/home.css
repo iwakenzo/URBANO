@@ -1,0 +1,364 @@
+body {
+    margin: 0px;
+    font-family: sans-serif;
+    background-color: #F8F6EB;
+    
+}
+
+.header .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    margin-left: 4vh;
+}
+
+.logo .subtitle {
+    margin-top: -5px;
+    color: #31802B;
+    font-family: urbanist;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.links-header {
+    display: flex;
+    justify-content: space-between;
+    text-decoration: none;
+}
+
+.nav-bar {
+    position: relative;
+    width: 35vw;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 30px;
+}
+
+.nav-bar a {
+    font-family: urbanist;
+    font-size: 48px;
+    text-decoration: none;
+    color: #31802B;
+}
+
+.burger {
+    position: relative;
+    width: 40px;
+    height: 30px;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+}
+
+input#burger {
+    display: none;
+}
+
+.burger span {
+    margin-top: 15px;
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: #31802B;
+    border-radius: 9px;
+    opacity: 1;
+    transition: .25s ease-in-out;
+    z-index: 10;
+}
+
+.burger span:nth-of-type(1) {
+    top: 0px;
+    transform-origin: left center;
+}
+
+.burger span:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: left center;
+}
+
+.burger span:nth-of-type(3) {
+    top: 100%;
+    transform-origin: left center;
+    transform: translateY(-100%);
+}
+
+input#burger:checked ~ label.burger span:nth-of-type(1) {
+    transform: rotate(45deg);
+    top: 0px;
+    left: 5px;
+    background-color: #F8F6EB;
+}
+
+input#burger:checked ~ label.burger span:nth-of-type(2) {
+    width: 0%;
+    opacity: 0;
+    background-color: #F8F6EB;
+}
+
+input#burger:checked ~ label.burger span:nth-of-type(3) {
+    transform: rotate(-45deg);
+    top: 28px;
+    left: 5px;
+    background-color: #F8F6EB;
+}
+
+input#burger:checked ~ span {
+    background-color: #F8F6EB;
+}
+
+input#burger:checked ~ .offscreenmenu {
+    transform: translateX(0);
+}
+
+input#burger:checked ~ label.burger {
+    position: fixed;
+    top: 35px;
+    right: 4vw;
+    z-index: 1001;
+}
+
+.offscreenmenu {
+    background-color: #31802B;
+    box-shadow: #191413 15px 0px 5px 15px;
+    height: 100vh;
+    width: 30vw;
+    position: fixed;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 3rem;
+    transition: transform .3s ease;
+    transform: translateX(100%);
+    z-index: 1000;
+}
+
+.offscreenmenu ul {
+    width: 20vw;
+    margin-bottom: 45rem;
+    margin-right: 10rem;
+}
+
+.offscreenmenu li {
+    display: flex;
+    list-style: none;
+    margin-top: 4vh;
+}
+
+.offscreenmenu li a {
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 45px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.homepage .background {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.homepage .background img {
+    height: 86vh;
+    
+}
+
+.homepage2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #31802B;
+    height: 100vh;
+}
+
+.homepage2 .container2 {
+    display: flex;
+    align-items: flex-start;
+    height: 97vh;
+    width: 96vw;
+
+}
+
+.logo2 .title2 {
+    font-family: "Cherry Bomb One", system-ui;
+    color: #F8F6EB;
+    font-size: 60px
+}
+
+.logo2 .subtitle2 {
+    margin-top: -2px;
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.homepage3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #191413;
+    height: 100vh;
+}
+
+.homepage3 .container3 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 97vh;
+    width: 96vw;
+
+}
+
+.content3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.logo3 {
+    width: 100%;
+}
+
+.logo3 .title3 {
+    font-family: "Cherry Bomb One", system-ui;
+    color: #E09034;
+    font-size: 60px
+}
+
+.logo3 .subtitle3 {
+    margin-top: -2px;
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.aboutme {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 70vh;
+    width: 100%;
+}
+
+.text1 {
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 25px;
+    font-weight: 400;
+    width: 20vw;
+    text-align: justify;
+}
+
+.text2 {
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 25px;
+    font-weight: 400;
+    width: 20vw;
+    text-align: justify;
+}
+
+.text3 {
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-size: 25px;
+    font-weight: 400;
+    width: 20vw;
+    text-align: justify;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: urbanist;
+    font-weight: 400;
+    font-size: 24px;
+    font-style: italic;
+    background-color: #F8F6EB;
+    color: #31802B;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    height: 24vh;
+}
+
+.copyright {
+    height: 15vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.copyright img {
+    width: 350px;
+    flex-direction: row;
+}
+
+.social-media {
+    height: 14vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.instagram-linkedin {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 8.75vh;
+    margin-bottom: 1vh;
+}
+
+.instagram-linkedin a {
+    height: 8vh;
+}
+
+.instagram-linkedin img {
+    height: 10vh;
+    width: 5vw;
+}
+
+.all-sdg-goals {
+    display: flex;
+    flex-direction: column;
+}
+
+.sdg-goals1 {
+    display: flex;
+    flex-direction: row;
+    height: 12vh;
+}
+
+.sdg-goals1 img {
+    height: 12vh;
+
+}
+
+.sdg-goals2 {
+    display: flex;
+    flex-direction: row;
+    height: 12vh;
+}
+
+.sdg-goals2 img {
+    height: 12vh;
+
+}

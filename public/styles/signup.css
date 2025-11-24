@@ -1,7 +1,7 @@
 body {
     margin: 0px;
     font-family: sans-serif;
-    background-color: #F8F6EB;
+    background-color: #191413;
     
 }
 
@@ -18,7 +18,7 @@ body {
 
 .logo .subtitle {
     margin-top: -5px;
-    color: #31802B;
+    color: #E09034;
     font-family: urbanist;
     font-size: 20px;
     font-weight: 600;
@@ -33,8 +33,8 @@ body {
 
 .nav-bar {
     position: relative;
-    width: 35vw;
-    padding: 2rem;
+    padding-right: 5rem;
+    padding-bottom: 2rem;
     display: flex;
     justify-content: space-evenly;
     margin-bottom: 30px;
@@ -44,7 +44,7 @@ body {
     font-family: urbanist;
     font-size: 48px;
     text-decoration: none;
-    color: #31802B;
+    color: #E09034;
 }
 
 .burger {
@@ -66,7 +66,7 @@ input#burger {
     position: absolute;
     height: 3px;
     width: 100%;
-    background: #31802B;
+    background: #E09034;
     border-radius: 9px;
     opacity: 1;
     transition: .25s ease-in-out;
@@ -126,7 +126,7 @@ input#burger:checked ~ label.burger {
 }
 
 .offscreenmenu {
-    background-color: #31802B;
+    background-color: #E09034;
     box-shadow: #191413 15px 0px 5px 15px;
     height: 100vh;
     width: 30vw;
@@ -146,14 +146,14 @@ input#burger:checked ~ label.burger {
 
 .offscreenmenu ul {
     width: 20vw;
-    margin-bottom: 45rem;
+    margin-bottom: 68.2vh;
     margin-right: 10rem;
 }
 
 .offscreenmenu li {
     display: flex;
     list-style: none;
-    margin-top: 4vh;
+    margin-top: 3vh;
 }
 
 .offscreenmenu li a {
@@ -164,146 +164,196 @@ input#burger:checked ~ label.burger {
     text-decoration: none;
 }
 
-.homepage .background {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.homepage .background img {
-    height: 86vh;
-    
-}
-
-.homepage2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #31802B;
-    height: 100vh;
-}
-
-.homepage2 .container2 {
-    display: flex;
-    align-items: flex-start;
-    height: 97vh;
-    width: 96vw;
-
-}
-
-.logo2 .title2 {
-    font-family: "Cherry Bomb One", system-ui;
-    color: #F8F6EB;
-    font-size: 60px
-}
-
-.logo2 .subtitle2 {
-    margin-top: -2px;
-    color: #F8F6EB;
-    font-family: urbanist;
-    font-size: 20px;
-    font-weight: 600;
-    font-style: italic;
-}
-
-.homepage3 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #191413;
-    height: 100vh;
-}
-
-.homepage3 .container3 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    height: 97vh;
-    width: 96vw;
-
-}
-
-.content3 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-.logo3 {
-    width: 100%;
-}
-
-.logo3 .title3 {
-    font-family: "Cherry Bomb One", system-ui;
-    color: #E09034;
-    font-size: 60px
-}
-
-.logo3 .subtitle3 {
-    margin-top: -2px;
-    color: #F8F6EB;
-    font-family: urbanist;
-    font-size: 20px;
-    font-weight: 600;
-    font-style: italic;
-}
-
-.aboutme {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 70vh;
-    width: 100%;
-}
-
-.text1 {
-    color: #F8F6EB;
-    font-family: urbanist;
-    font-size: 25px;
-    font-weight: 400;
-    width: 20vw;
-    text-align: justify;
-}
-
-.text2 {
-    color: #F8F6EB;
-    font-family: urbanist;
-    font-size: 25px;
-    font-weight: 400;
-    width: 20vw;
-    text-align: justify;
-}
-
-.text3 {
-    color: #F8F6EB;
-    font-family: urbanist;
-    font-size: 25px;
-    font-weight: 400;
-    width: 20vw;
-    text-align: justify;
-}
-
-.footer {
+.loginscreen .background {
     display: flex;
     justify-content: space-between;
-    align-items: end;
+}
+
+.loginscreen .background img {
+    height: 83.1vh;
+}
+
+.logincard {
+    width: 58vw;
+    margin-left: 2vw;
+    background-color: #E09034;
+    border-top-left-radius: 85px;
+    border-top-right-radius: 85px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 46.2vw;
+    height: 69.3vh;
+}
+
+.first-time {
+    width: 40%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2vw;
+    margin-top: 7.5vh;
+}
+
+.first-time img {
+    width: 26vw;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    color: #F8F6EB;
     font-family: urbanist;
     font-weight: 400;
-    font-size: 18px;
-    font-style: italic;
-    background-color: #F8F6EB;
-    color: #31802B;
-    margin-left: 3vw;
-    margin-right: 3vw;
-    height: 15vh;
+    font-size: 24px;
+    width: 50%;
+    height: 100%;
+    margin-right: 2vw;
 }
 
-.copyright {
-    height: 3vh;
+.inputs input {
+    width: 18vw;
+    height: 8vh;
+    border-style: none;
+    border-radius: 15px;
+    color: #191413;
+    font-family: urbanist;
+    font-weight: 400;
+    font-size: 24px;
+    outline-style: none;
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
-.social-media {
-    height: 11vh;
+.inputs input::placeholder {
+    color: #191413;
+    font-family: urbanist;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+.name-here {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.name-here span {
+    height: 4vh;
+    margin-left: 1vw;
+}
+
+.email-here {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.email-here span {
+    margin-top: 2vh;
+    height: 1vh;
+    margin-left: 1vw;
+}
+
+.email-here .validation {
+    font-family: urbanist;
+    font-size: 15px;
+    font-weight: 400;
+    height: 1vh;
+    margin-top: 1vh;
+    margin-left: 1vw;
+}
+
+.password-here {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 17vh;
+}
+
+.password-here span{
+    margin-top: 2vh;
+    height: 1vh;
+    margin-left: 1vw;
+}
+
+.password-here input {
+    margin-bottom: 3vh;
+}
+
+.password-here .validation {
+    font-family: urbanist;
+    font-size: 15px;
+    font-weight: 400;
+    height: 1vh;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}
+
+.confirm-password .validation {
+    font-family: urbanist;
+    font-size: 15px;
+    font-weight: 400;
+    height: 1vh;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}
+
+.login-session {
+    width: 28vw;
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.login-session button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #191413;
+    color: #F8F6EB;
+    font-family: urbanist;
+    font-weight: 400;
+    font-size: 24px;
+    height: 7vh;
+    width: 9vw;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.already-acc-login {
+    width: 15vw;
+    height: 4vh;
+    margin-left: 3.2vw;
+    font-size: 15px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.login-now {
+    width: 10vw;
+    font-weight: 400;
+}
+
+.login-now a {
+    color: #191413;
+    font-weight: 800;
+    text-decoration: none;
 }

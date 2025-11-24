@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URBANO. | CADASTRO.</title>
+    <link rel="stylesheet" href="./styles/signup.css">
+    <script src="./js/sessao.js"></script>
+
+     <!-- Fontes utilizadas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html"><img width="315" height="93" src="./assets/logo_alt.png" alt="logo do site"></a>
+                <p class="subtitle">COOL KIDS DISCOVER <br> THEMSELVES.</p>
+            </div>
+        <div class="links-header">
+            <nav class="nav-bar">
+                <input type="checkbox" id="burger" onchange="burger_menu()">
+                <label class="burger" for="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <div class="offscreenmenu">
+                    <ul>
+                        <li> <a class="menu_item" href="./login.html">LOGIN</a></li>
+                        <li> <a class="menu_item" href="./index.html#timelineref">TIMELINE</a></li>
+                        <li> <a class="menu_item" href="./index.html#aboutme">SOBRE MIM</a></li>
+                        <li> <a class="menu_item" href="./index.html#learnmoreref">SAIBA MAIS</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="loginscreen">
+        <div class="background">
+            <div class="logincard">
+                <div class="content">
+                    <div class="inputs">
+                        <div class="name-here">
+                            <span>NOME:</span>
+                            <input type="text" id="input_name" placeholder="INSIRA SEU NOME">
+                        </div>
+                        <div class="email-here">
+                            <span>E-MAIL:</span><br>
+                            <input type="text" id="input_email" placeholder="INSIRA SEU E-MAIL" oninput="analyse_email()">
+                            <div id="analyse_email_div" class="validation"></div>
+                        </div>
+                        <div class="password-here">
+                            <span>SENHA:</span><br>
+                            <input type="password" id="input_password" placeholder="INSIRA SUA SENHA" oninput="analyse_password()">
+                        </div>
+                        <div class="confirm-password">
+                            <input type="password" id="confirm_password" placeholder="CONFIRME SUA SENHA" oninput="analyse_password2()">
+                            <div id="analyse_password_div" class="validation"></div>
+                        </div>
+                        <div class="login-session">
+                            <button onclick="cadastrar()">CADASTRAR</button>
+                            <div class="already-acc-login">
+                                <div class="login-now">
+                                    OU FAÇA LOGIN <br> CLICANDO
+                                    <a class="login-redirection" href="./login.html">AQUI</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="first-time">
+                        <img src="./assets/first-time-text.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <img src="./assets/signuppage_background.png" alt="imagem de fundo">
+        </div>
+    </div>
+</body>
+</html>
+<script>
+
+    var specialCharacters = ['!', '@', '#', '$', '%', '&', '*'];
+    var validNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+    var validEmail = false
+    var validPassword = false
+    var validPassword2 = false
+    var validConfirm = false
+
+    function analyse_email() {
+        var email = input_email.value;
+
+        if (!email.includes('@')) {
+            analyse_email_div.innerHTML = 'EMAIL INVÁLIDO'
+        } else {
+            analyse_email_div.innerHTML = '';
+            validEmail = true
+        } 
+    }
+
+    function analyse_password() {
+        var password = input_password.value;
+     
+        for (i = 0; i < validNumbers.length; i++) {
+            if (password.includes(specialCharacters[i])) {
+                validPassword = true;
+                analyse_password_div.innerHTML = '';
+            }
+        }
+        
+        if (!validPassword) {
+            analyse_password_div.innerHTML = 'SENHA INVÁLIDA'
+        }
+
+        for (var j = 0; j < specialCharacters.length; j++) {
+            if (password.includes(specialCharacters[j])) {
+                validPassword2 = true;
+                analyse_password_div.innerHTML = ''
+            }
+        } 
+
+        if (!validPassword2) {
+            analyse_password_div.innerHTML = 'SENHA INVÁLIDA'
+        }
+    }
+
+    function analyse_password2() {
+        var password = input_password.value;
+        var confirmPassword = confirm_password.value;
+
+        if (password != confirmPassword) {
+            analyse_password_div.innerHTML = `AS SENHAS NÃO CORRESPONDEM`
+        } else {
+            analyse_password_div.innerHTML = ''
+            validConfirm = true
+        }
+    }
+
+    function cadastrar() {
+        var name = input_name.value;
+        var email = input_email.value;
+        var password = input_password.value;
+        var confirmPassword = confirm_password.value;
+
+        if (name == "" || email == "" || password == "" || confirmPassword == "") {
+            alert('Cadastro Inválido! Confira os campos');
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+      
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: name,
+                emailServer: email,
+                senhaServer: password
+            }),
+        })
+
+        if (validEmail && validPassword && validPassword2 && validConfirm) {
+            alert('Cadastro Efetuado!');
+            window.location.href ='login.html';
+        } else {
+            alert('Cadastro Inválido! Confira os campos');
+        }
+        
+    }
+</script>
