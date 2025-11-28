@@ -1,88 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>URBANO. | DASHBOARD.</title>
-     <link rel="stylesheet" href="./styles/dashboard.css">
+    <link rel="stylesheet" href="./styles/dashboard.css" />
     <script src="./js/sessao.js"></script>
 
     <!-- Import do chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Fontes utilizadas -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
-</head>
-<body>
-     <div class="header">
-        <div class="container">
-            <div class="logo">
-                <a href="index.html"><img width="315" height="93" src="./assets/logo_alt2.png" alt="logo do site"></a>
-                <p class="subtitle">COOL KIDS DISCOVER <br> THEMSELVES.</p>
-            </div>
-            <div class="links-header">
-                <nav class="nav-bar">
-                    <input type="checkbox" id="burger" onchange="burger_menu()">
-                    <label class="burger" for="burger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </label>
-                    <div class="offscreenmenu">
-                        <ul>
-                            <li> <a class="menu_item" href="./quiz.html">QUIZ</a></li>
-                            <li> <a class="menu_item" href="./dedication.html">DEDICATÓRIA</a></li>
-                            <li> <a class="menu_item" href="./index.html">SAIR</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">
+        <div class="logo">
+          <a href="index.html"
+            ><img
+              width="315"
+              height="93"
+              src="./assets/logo_alt2.png"
+              alt="logo do site"
+          /></a>
+          <p class="subtitle">
+            COOL KIDS DISCOVER <br />
+            THEMSELVES.
+          </p>
         </div>
+        <div class="links-header">
+          <nav class="nav-bar">
+            <input type="checkbox" id="burger" onchange="burger_menu()" />
+            <label class="burger" for="burger">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+            <div class="offscreenmenu">
+              <ul>
+                <li><a class="menu_item" href="./quiz.html">QUIZ</a></li>
+                <li>
+                  <a class="menu_item" href="./dedication.html">DEDICATÓRIA</a>
+                </li>
+                <li><a class="menu_item" href="./index.html">SAIR</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
     </div>
     <div class="content">
-        <div class="dashboard">
-            <div class="kpis">
-                <div class="your-style">
-                    <span>SEU ESTILO É:</span>
-                </div>
-                <div class="kpi2">
-                    <span>ESTILO MAIS COMUM <br> ENTRE OS USUÁRIOS:</span>
-                </div>
-                <div class="kpi3">
-                    <span>KPI 3</span>
-                </div>
-            </div>
-            <div class="chart-box">
-                <div class="chart">
-                    <canvas id="myChart"></canvas>
-                    <canvas id="myChartLine"></canvas>
-                </div>
-            </div>
+      <div class="dashboard">
+        <div class="simple-kpis">
+          <div class="your-style">
+            <span>SEU ESTILO É:</span>
+          </div>
+          <div class="kpi2">
+            <span
+              >ESTILO MAIS COMUM <br />
+              ENTRE OS USUÁRIOS:</span
+            >
+          </div>
+          <div class="kpi3">
+            <span>SEU OUTFIT:</span>
+          </div>
         </div>
+        <div class="chart-box">
+          <div class="chart">
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
 <script>
-    const ctx = document.getElementById('myChart');
-    const ctxLine = document.getElementById('myChartLine')
+  const ctx = document.getElementById("myChart");
 
-    new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-        labels: [],
-        datasets: [{
-            label: 'Pessoas que se encaixam nesse estilo',
-            data: [7, 3, 12, 8, 9, 6, 5],
-            borderWidth: 0,
-            borderColor: '#F8F6EB',
-            backgroundColor: ['#FA4245', '#169BD4', '#31802B', '#FADE42', '#A442FA', '#FA9E42', '#FA42E1']
-        }, 
-]
+  new Chart(ctx, {
+    type: "doughnut",
+    data: {
+      labels: ['Romântico', 'Clássico', 'Elegante', 'Esportivo', 'Dramático', 'Experimentalista', 'Sexy'],
+      datasets: [
+        {
+          label: "Pessoas que se encaixam nesse estilo",
+          data: [7, 3, 12, 8, 9, 6, 5],
+          borderWidth: 0,
+          borderColor: "#F8F6EB",
+          backgroundColor: [
+            "#FA4245",
+            "#0059bf",
+            "#31802B",
+            "#FADE42",
+            "#FA9E42",
+            "#A442FA",
+            "#FA42E1",
+          ],
         },
-        options: {
-        }
-    });
+      ],
+    },
+    options: {},
+  });
 </script>
