@@ -196,9 +196,9 @@ input#burger:checked ~ label.burger {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24vw;
+    width: 38vw;
     height: 55vh;
-    margin-left: 2vw;
+    /* margin-left: 2vw; */
 }
 
 .simple-kpis {

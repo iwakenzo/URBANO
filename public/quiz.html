@@ -4,286 +4,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exemplo - Quiz</title>
-    <link rel="stylesheet" href="style.css">
+    <title>URBANO. | QUIZ.</title>
 </head>
 
-
-<body onload="onloadEsconder()">
-    <div id="pontuacaoEJogo">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
-
-        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
-            <div id="pontuacaoDuranteJogo" class="flex-colunar padding-8">
-                <span class="width-fit-content">Quantidade de acertos: <span id="spanCertas"></span></span>
-                <span class="width-fit-content">Quantidade de erros: <span id="spanErradas"></span></span>
-            </div>
-            <div id="pontuacaoFinalJogo" class="flex-colunar padding-8">
-                <span id="pontuacaoFinal" class="width-fit-content">Pontuação Final:
-                    <span id="spanPontuacaoFinal">***</span>
-                </span>
-                <span id="msgFinal" class="width-fit-content">***</span>
-            </div>
-        </div>
-
-        <div id="jogo" class="width-fit-content flex-colunar border-secondary">
-
-            <div id="infoQuestao" class="padding-8">
-                <span>Questão atual: <span id="spanNumeroDaQuestaoAtual"></span> de <span id="qtdQuestoes"></span>
-                    questões.</span>
-            </div>
-
-            <div id="perguntaDaQuestaoAtual" class="padding-8">
-                <span id="spanQuestaoExibida" class="text-bold"></span>
-            </div>
-
-            <div id="infoAlternativas" class="padding-8">
-                <span><em>Escolha uma opção dentre as abaixo:</em></span>
-            </div>
-
-            <div id="opcoes" class="flex-colunar padding-8">
-                <span>
-                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
-                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
-                </span>
-                <span>
-                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
-                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
-                </span>
-                <span>
-                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
-                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
-                </span>
-                <span>
-                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
-                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
-                </span>
-            </div>
-
-            <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submeter()" id="btnSubmeter">Submeter resposta</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
-            </div>
-
-        </div>
+<body>
+    <div class="container">
+        <span>DESCUBRA SEU ESTILO</span>
+        <div id="quiz"></div>
+        <button id="nextButton" onclick="nextQuestion()">COMEÇAR QUIZ</button>
     </div>
 </body>
 
 </html>
 <script>
-    const listaDeQuestoes = [
-
+    var quizData = [
         {
-            pergunta: "Qual mês tem 30 dias?",
-            alternativaA: "Janeiro",
-            alternativaB: "Dezembro",
-            alternativaC: "Junho",
-            alternativaD: "Agosto",
-            alternativaCorreta: "alternativaC"
+            question: "1. O que é indispensável em uma peça de roupa para você?",
+            options: [
+                {letter: "A", awnser: "Conforto absoluto e praticidade.", "sporty_points": 2, "creative_points": 1},
+                {letter: "B", awnser: "Qualidade impecável, durabilidade e bom acabamento.", "classy_points": 2, "traditional_points": 1},
+                {letter: "C", awnser: "Suavidade, leveza e detalhes delicados.", "romantic_points": 2},
+                {letter: "D", awnser: "Impacto visual, força e um corte que transmita confiança.", "dramatic_points": 2, "sexy_points": 1},
+                {letter: "E", awnser: "Originalidade; algo que represente o meu mood do dia.", "creative_points": 2, "dramatic_points": 1}
+            ]
         },
-
         {
-            pergunta: "Quantas horas tem em um dia?",
-            alternativaA: "30 horas",
-            alternativaB: "38 horas",
-            alternativaC: "48 horas",
-            alternativaD: "24 horas",
-            alternativaCorreta: "alternativaD"
+            question: "2. Qual paleta de cores domina o seu guarda-roupa?",
+            options: [
+                {letter: "A", awnser: "Cores neutras e naturais (branco, cinza, bege, azul-marinho).", "sporty_points": 2, "classy_points": 1},
+                {letter: "B", awnser: "Cores sóbrias, discretas e fechadas.", "traditional_points": 2, "classy_points": 1},
+                {letter: "C", awnser: "Tons pastéis e cores claras/suaves.", "romantic_points": 2},
+                {letter: "D", awnser: "Cores intensas, fortes e contrastantes.", "sexy_points": 2, "dramatic_points": 1},
+                {letter: "E", awnser: "Uma mistura livre de cores vibrantes e combinações inusitadas.", "creative_points": 2}
+            ]
         },
-
         {
-            pergunta: "Qual destes números é ímpar?",
-            alternativaA: "Dez",
-            alternativaB: "Doze",
-            alternativaC: "Oito",
-            alternativaD: "Onze",
-            alternativaCorreta: "alternativaD"
+            question: "3. Quando o assunto é sapatos, o que você escolhe para o dia a dia?",
+            options: [
+                {letter: "A", awnser: "Tênis, calçados planos e anatômicos.", "sporty_points": 2},
+                {letter: "B", awnser: "Mocassins, sapatos clássicos de couro ou bico fechado.", "traditional_points": 2, "classy_points": 1},
+                {letter: "C", awnser: "Sapatilhas delicadas ou modelos discretos.", "romantic_points": 2},
+                {letter: "D", awnser: "Botas de verniz, sapatos de design arrojado ou saltos imponentes.", "dramatic_points": 2, "sexy_points": 1},
+                {letter: "E", awnser: "Sapatos com designs artísticos, coloridos ou com formatos diferentes.", "creative_points": 2}
+            ]
+        },
+        {
+            question: "4. Como você lida com o seu cabelo e cuidados com o rosto?",
+            options: [
+                {letter: "A", awnser: "Praticidade total: visual natural e fácil de manter.", "sporty_points": 2},
+                {letter: "B", awnser: "Impecável: sempre alinhado e com corte em dia.", "classy_points": 2, "traditional_points": 1},
+                {letter: "C", awnser: "Suave: visual leve e com movimento natural.", "romantic_points": 2},
+                {letter: "D", awnser: "Marcante: cortes modernos ou visual de impacto.", "dramatic_points": 2, "sexy_points": 1},
+                {letter: "E", awnser: "Original: gosto de mudar, usar cores ou acessórios.", "creative_points": 2}
+            ]
+        },
+        {
+            question: "5. Qual destes acessórios ou complementos não pode faltar?",
+            options: [
+                {letter: "A", awnser: "Mochila funcional, smartwatch ou itens práticos.", "sporty_points": 2},
+                {letter: "B", awnser: "Relógio clássico, cinto de couro ou itens de marca discreta.", "traditional_points": 2, "classy_points": 1},
+                {letter: "C", awnser: "Acessórios sutis, com significado pessoal ou design leve.", "romantic_points": 2},
+                {letter: "D", awnser: "Óculos grandes, metais pesados ou itens que chamem atenção.", "dramatic_points": 2, "sexy_points": 1},
+                {letter: "E", awnser: "Peças artesanais, vintage ou com design artístico.", "creative_points": 2}
+            ]
+        },
+        {
+            question: "6. Se você fosse convidado para um evento social importante, o que vestiria?",
+            options: [
+                {letter: "A", awnser: "Algo que não me aperte e me deixe à vontade.", "sporty_points": 2},
+                {letter: "B", awnser: "Alfaiataria impecável (terno ou blazer) bem cortada e alinhada.", "classy_points": 2, "traditional_points": 1},
+                {letter: "C", awnser: "Tecidos leves, cores suaves e caimento fluido.", "romantic_points": 2},
+                {letter: "D", awnser: "Visual estruturado, cores escuras ou cortes modernos de impacto.", "dramatic_points": 2, "sexy_points": 1},
+                {letter: "E", awnser: "Uma combinação ousada de peças ou um design inovador.", "creative_points": 2, "dramatic_points": 1}
+            ]
+        },
+        {
+            question: "7. O que você prefere em relação a estampas e texturas?",
+            options: [
+                {letter: "A", awnser: "Prefiro lisos ou listras simples e casuais.", "sporty_points": 2, "traditional_points": 1},
+                {letter: "B", awnser: "Gosto das clássicas: xadrez discreto ou risca de giz.", "traditional_points": 2, "classy_points": 1},
+                {letter: "C", awnser: "Estampas pequenas, discretas ou texturas suaves ao toque.", "romantic_points": 2},
+                {letter: "D", awnser: "Alto contraste, formas geométricas grandes ou texturas marcantes.", "dramatic_points": 2, "sexy_points": 1},
+                {letter: "E", awnser: "Mix de estampas, gráficos artísticos ou étnicos.", "creative_points": 2}
+            ]
+        },
+        {
+            question: "8. Qual mensagem você quer passar com sua imagem?",
+            options: [
+                {letter: "A", awnser: "Sou acessível, descomplicado e leve.", "sporty_points": 2},
+                {letter: "B", awnser: "Sou profissional, confiável e sério.", "traditional_points": 2, "classy_points": 1},
+                {letter: "C", awnser: "Sou empático, calmo e acolhedor.", "romantic_points": 2},
+                {letter: "D", awnser: "Sou forte, intenso e autoconfiante.", "sexy_points": 2, "dramatic_points": 1},
+                {letter: "E", awnser: "Sou criativo, livre e tenho personalidade única.", "creative_points": 2}
+            ]
+        },
+        {
+            question: "9. O que mais te incomoda em um visual?",
+            options: [
+                {letter: "A", awnser: "Roupas apertadas, tecidos rígidos ou que pinicam.", "sporty_points": 2},
+                {letter: "B", awnser: "Parecer desleixado ou usar algo com acabamento ruim.", "classy_points": 2, "traditional_points": 1},
+                {letter: "C", awnser: "Visuais muito agressivos, pesados ou frios.", "romantic_points": 2},
+                {letter: "D", awnser: "Passar despercebido ou parecer sem sal na multidão.", "dramatic_points": 2, "sexy_points": 1},
+                {letter: "E", awnser: "Estar vestido igual a todo mundo (uniformizado).", "creative_points": 2}
+            ]
+        },
+        {
+            question: "10. O que define sua decisão de compra?",
+            options: [
+                {letter: "A", awnser: "Funcionalidade: serve para várias coisas e é confortável?", "sporty_points": 2},
+                {letter: "B", awnser: "Custo-benefício: é uma peça durável que vale o investimento?", "traditional_points": 2, "classy_points": 1},
+                {letter: "C", awnser: "Conexão: a peça me traz uma sensação boa e acolhedora?", "romantic_points": 2},
+                {letter: "D", awnser: "Poder: a peça me faz sentir mais confiante e forte?", "sexy_points": 2, "dramatic_points": 1},
+                {letter: "E", awnser: "Exclusividade: é algo diferente que ninguém tem igual?", "creative_points": 2}
+            ]
         }
-
-    ]
-
-    // variáveis globais    
-    let numeroDaQuestaoAtual = 0
-    let pontuacaoFinal = 0
-    let tentativaIncorreta = 0
-    let certas = 0
-    let erradas = 0
-    let quantidadeDeQuestoes = listaDeQuestoes.length
-    // let isUltima = numeroDaQuestaoAtual == quantidadeDeQuestoes-1 ? true : false
-
-    function onloadEsconder() {
-        document.getElementById('pontuacao').style.display = "none"
-        document.getElementById('jogo').style.display = "none"
+    ];
+    
+    var totalPoints = {
+        sporty_points: 0,
+        classy_points: 0,
+        traditional_points: 0,
+        romantic_points: 0,
+        dramatic_points: 0,
+        sexy_points: 0,
+        creative_points: 0
     }
 
-    function iniciarQuiz() {
-        document.getElementById('pontuacao').style.display = "flex"
-        document.getElementById('jogo').style.display = "flex"
-        document.getElementById('btnIniciarQuiz').style.display = "none"
+    function calculatePoints(respostas, quiz) {
+        respostas.forEach((iAwnser, iQuestion) => {
+            var actualQuestion = quiz[iQuestion];
+            var selectedOption = actualQuestion.options[iAwnser];
 
-        document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes
-
-        preencherHTMLcomQuestaoAtual(0)
-
-        btnSubmeter.disabled = false
-        btnProx.disabled = true
-        // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = true
-    }
-
-    function preencherHTMLcomQuestaoAtual(index) {
-        habilitarAlternativas(true)
-        const questaoAtual = listaDeQuestoes[index]
-        numeroDaQuestaoAtual = index
-        console.log("questaoAtual")
-        console.log(questaoAtual)
-        document.getElementById("spanNumeroDaQuestaoAtual").innerHTML = Number(index) + 1 // ajustando porque o index começa em 0
-        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
-        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
-        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
-        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
-        document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
-    }
-
-    function submeter() {
-        const options = document.getElementsByName("option"); // recupera alternativas no html
-
-        let hasChecked = false
-        for (let i = 0; i < options.length; i++) {
-            if (options[i].checked) {
-                hasChecked = true
-                break
-            }
-        }
-
-        if (!hasChecked) {
-            alert("Não há alternativas escolhidas. Escolha uma opção.")
-        } else {
-            btnSubmeter.disabled = true
-            btnProx.disabled = false
-
-            habilitarAlternativas(false)
-
-            checarResposta()
-        }
-    }
-
-    function habilitarAlternativas(trueOrFalse) {
-        let opcaoEscolhida = trueOrFalse ? false : true
-
-        primeiraOpcao.disabled = opcaoEscolhida
-        segundaOpcao.disabled = opcaoEscolhida
-        terceiraOpcao.disabled = opcaoEscolhida
-        quartaOpcao.disabled = opcaoEscolhida
-
-    }
-
-    function avancar() {
-        btnProx.disabled = true
-        btnSubmeter.disabled = false
-
-        desmarcarRadioButtons()
-
-        if (numeroDaQuestaoAtual < quantidadeDeQuestoes - 1) {
-            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
-        } else if (numeroDaQuestaoAtual == quantidadeDeQuestoes - 1) {
-            alert("Atenção... a próxima é a ultima questão!")
-            preencherHTMLcomQuestaoAtual(numeroDaQuestaoAtual)
-        } else {
-            finalizarJogo()
-        }
-        limparCoresBackgroundOpcoes()
-    }
-
-    function tentarNovamente() {
-        // atualiza a página
-        window.location.reload()
-    }
-
-    function checarResposta() {
-        const questaoAtual = listaDeQuestoes[numeroDaQuestaoAtual] // questão atual 
-        const respostaQuestaoAtual = questaoAtual.alternativaCorreta // qual é a resposta correta da questão atual
-
-        const options = document.getElementsByName("option"); // recupera alternativas no html
-
-        let alternativaCorreta = null // variável para armazenar a alternativa correta
-
-        options.forEach((option) => {
-            if (option.value === respostaQuestaoAtual) {
-                console.log("alternativaCorreta está no componente: " + alternativaCorreta)
-                alternativaCorreta = option.labels[0].id
-            }
-        })
-
-        // verifica se resposta assinalada é correta
-        options.forEach((option) => {
-            if (option.checked === true && option.value === respostaQuestaoAtual) {
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                pontuacaoFinal++
-                certas++
-                document.getElementById("spanCertas").innerHTML = certas
-                numeroDaQuestaoAtual++
-            } else if (option.checked && option.value !== respostaQuestaoAtual) {
-                const wrongLabelId = option.labels[0].id
-
-                document.getElementById(wrongLabelId).classList.add("text-danger-with-bg")
-                document.getElementById(alternativaCorreta).classList.add("text-success-with-bg")
-                tentativaIncorreta++
-                erradas++
-                document.getElementById("spanErradas").innerHTML = erradas
-                numeroDaQuestaoAtual++
-            }
-        })
-    }
-
-    function limparCoresBackgroundOpcoes() {
-        const options = document.getElementsByName("option");
-        options.forEach((option) => {
-            document.getElementById(option.labels[0].id).classList.remove("text-danger-with-bg")
-            document.getElementById(option.labels[0].id).classList.remove("text-success-with-bg")
-        })
-    }
-
-    function desmarcarRadioButtons() {
-        const options = document.getElementsByName("option");
-        for (let i = 0; i < options.length; i++) {
-            options[i].checked = false;
-        }
-    }
-
-    function finalizarJogo() {
-        let textoParaMensagemFinal = null
-        let classComCoresParaMensagemFinal = null
-        const porcentagemFinalDeAcertos = pontuacaoFinal / quantidadeDeQuestoes
-
-        if (porcentagemFinalDeAcertos <= 0.3) {
-            textoParaMensagemFinal = "Parece que você não estudou..."
-            classComCoresParaMensagemFinal = "text-danger-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos > 0.3 && porcentagemFinalDeAcertos < 0.9) {
-            textoParaMensagemFinal = "Pode melhorar na próxima, hein!"
-            classComCoresParaMensagemFinal = "text-warning-with-bg"
-        }
-        else if (porcentagemFinalDeAcertos >= 0.9) {
-            textoParaMensagemFinal = "Uau, parabéns!"
-            classComCoresParaMensagemFinal = "text-success-with-bg"
-        }
-
-        textoParaMensagemFinal += "<br> Você acertou " + Math.round((porcentagemFinalDeAcertos)*100) + "% das questões."
-
-
-        document.getElementById('msgFinal').innerHTML = textoParaMensagemFinal
-        document.getElementById('msgFinal').classList.add(classComCoresParaMensagemFinal) 
-        document.getElementById('spanPontuacaoFinal').innerHTML = pontuacaoFinal
-
-        document.getElementById('jogo').classList.add("text-new-gray") 
-
-        btnProx.disabled = true
-        btnSubmeter.disabled = true
-        // btnConcluir.disabled = true
-        btnTentarNovamente.disabled = false
-
-    }
+            totalPoints.sporty_points += selectedOption.sporty_points;
+            totalPoints.classy_points += selectedOption.classy_points;
+            totalPoints.traditional_points += selectedOption.traditional_points;
+            totalPoints.romantic_points += selectedOption.romantic_points;
+            totalPoints.dramatic_points += selectedOption.dramatic_points;
+            totalPoints.sexy_points += selectedOption.sexy_points;
+            totalPoints.creative_points += selectedOption.creative_points;
+        } 
+    )}
 </script>

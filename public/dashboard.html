@@ -63,7 +63,9 @@
       <div class="dashboard">
         <div class="simple-kpis">
           <div class="your-style">
-            <span>SEU ESTILO É:</span>
+            <span>SEU ESTILO É:
+              <span id="yourStyleSpan" class="yourStyleKPI"></span>
+            </span>
           </div>
           <div class="kpi2">
             <span
@@ -85,30 +87,93 @@
   </body>
 </html>
 <script>
-  const ctx = document.getElementById("myChart");
 
-  new Chart(ctx, {
-    type: "doughnut",
-    data: {
-      labels: ['Romântico', 'Clássico', 'Elegante', 'Esportivo', 'Dramático', 'Experimentalista', 'Sexy'],
-      datasets: [
-        {
-          label: "Pessoas que se encaixam nesse estilo",
-          data: [7, 3, 12, 8, 9, 6, 5],
-          borderWidth: 0,
-          borderColor: "#F8F6EB",
-          backgroundColor: [
-            "#FA4245",
-            "#0059bf",
-            "#31802B",
-            "#FADE42",
-            "#FA9E42",
-            "#A442FA",
-            "#FA42E1",
-          ],
-        },
+function loadDashboard() {
+  kpi1();
+  kpi2();
+  kpi3();
+}
+
+// CONFIGURAÇÃO CHART.JS
+
+ const ctx = document.getElementById('myChart');
+
+new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ['Esportivo', 'Tradicional', 'Elegante', 'Sexy', 'Romântico', 'Criativo', 'Dramático'],
+    datasets: [{
+      data: [12, 19, 3, 7, 9, 4, 8],
+      backgroundColor: [
+        '#A8DADC', // Esportivo (Azul claro)
+        '#1D3557', // Tradicional (Azul escuro)
+        '#F1FAEE', // Elegante (Off-white/Cinza)
+        '#E63946', // Magnético (Vermelho)
+        '#FFC8DD', // Romântico (Rosa)
+        '#FFB703', // Criativo (Amarelo)
+        '#000000'  // Dramático (Preto)
       ],
-    },
-    options: {},
-  });
+      borderWidth: 1
+    }]
+  }
+});
+
+// KPI 1 - SEU ESTILO
+
+function kpi1() {
+  yourStyleSpan.innerHTML = result
+}
+
+// KPI 2 - ESTILO MAIS POPULAR ENTRE OS USUÁRIOS
+
+function kpi2() {
+
+}
+
+// KPI 3 - SEU OUTFIT
+
+const outfitRandomizer = {
+  "Esportivo": {
+    cabeca: [], 
+    superior: [],
+    inferior: [],
+    pes: []
+  },
+  "Tradicional": {
+    cabeca: [],
+    superior: [],
+    inferior: [],
+    pes: []
+  },
+  "Elegante": {
+    cabeca: [],
+    superior: [],
+    inferior: [],
+    pes: []
+  },
+  "Romântico": {
+    cabeca: [],
+    superior: [],
+    inferior: [],
+    pes: []
+  },
+  "Sexy": {
+    cabeca: [],
+    superior: [],
+    inferior: [],
+    pes: []
+  },
+  "Criativo": {
+    cabeca: [],
+    superior: [],
+    inferior: [],
+    pes: []
+  },
+  "Dramático": {
+    cabeca: [],
+    superior: [],
+    inferior: [],
+    pes: []
+  }
+}
 </script>
