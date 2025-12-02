@@ -201,6 +201,10 @@ input#burger:checked ~ label.burger {
     /* margin-left: 2vw; */
 }
 
+.chart canvas {
+    height: 25vh;
+}
+
 .simple-kpis {
     display: flex;
     flex-direction: row;
@@ -213,25 +217,31 @@ input#burger:checked ~ label.burger {
     width: 18vw;
     height: 14vh;
     display: flex;
+    flex-direction: column;
     margin-right: 2vw;
     justify-content: center;
     border-radius: 35px;
     font-family: urbanist;
     font-weight: 800;
     font-style: italic;
-    font-size: 24px;
+    font-size: 20px;
     background-color: #169BD4;
 }
 
 .your-style span {
-    margin-top: 2vh;
     color: #F8F6EB;
+    text-align: center;
+}
+
+.yourStyleKPI {
+    font-size: 34px;
 }
 
 .kpi2 {
     width: 18vw;
     height: 14vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     border-radius: 30px;
     font-family: urbanist;
@@ -242,8 +252,12 @@ input#burger:checked ~ label.burger {
 }
 
 .kpi2 span {
-    margin-top: 2vh;
     color: #F8F6EB;
+    text-align: center;
+}
+
+.mostCommonStyleKPI {
+    font-size: 28px;
 }
 
 .bigger-kpi {

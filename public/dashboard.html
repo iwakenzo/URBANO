@@ -51,14 +51,13 @@
     <div class="dashboard">
       <div class="simple-kpis">
         <div class="your-style">
-          <span>SEU ESTILO É:
-            <span id="yourStyleSpan" class="yourStyleKPI"></span>
+          <span>SEU ESTILO É: <br>
           </span>
+          <span id="yourStyleSpan" class="yourStyleKPI"></span>
         </div>
         <div class="kpi2">
-          <span>ESTILO MAIS COMUM <br />
-            ENTRE OS USUÁRIOS: <span id="mostCommonStyleSpan" class="mostCommonStyleKPI"></span>
-          </span>
+          <span>ESTILO MAIS COMUM ENTRE OS USUÁRIOS: </span>
+          <span id="mostCommonStyleSpan" class="mostCommonStyleKPI"></span>
         </div>
         <div class="kpi3">
           <span>SEU OUTFIT:</span>
@@ -144,28 +143,28 @@
     var idUsuario = sessionStorage.ID_USUARIO;
 
     fetch(`/quiz/user-style/${idUsuario}`, {
-    method: "GET"
-  })
-  .then(resposta => {
-      if (resposta.status === 204) {
-        document.getElementById('yourStyleSpan').innerHTML = "FAÇA O QUIZ PRIMEIRO!";
-        return null;
-      }
-      if (!resposta.ok) {
-        throw new Error('Erro ao buscar seu estilo');
-      }
-      return resposta.json();
+      method: "GET"
     })
-    .then(dados => {
-      if (dados && dados.length > 0) {
-        document.getElementById('yourStyleSpan').innerHTML = dados[0].estilo;
-      }
-    })
-    .catch(erro => {
-      console.error("Erro KPI1:", erro);
-      document.getElementById('yourStyleSpan').innerHTML = "<br>ERRO AO CARREGAR";
-    });
-}
+      .then(resposta => {
+        if (resposta.status === 204) {
+          document.getElementById('yourStyleSpan').innerHTML = "FAÇA O QUIZ PRIMEIRO!";
+          return null;
+        }
+        if (!resposta.ok) {
+          throw new Error('Erro ao buscar seu estilo');
+        }
+        return resposta.json();
+      })
+      .then(dados => {
+        if (dados && dados.length > 0) {
+          document.getElementById('yourStyleSpan').innerHTML = dados[0].estilo;
+        }
+      })
+      .catch(erro => {
+        console.error("Erro KPI1:", erro);
+        document.getElementById('yourStyleSpan').innerHTML = "<br>ERRO AO CARREGAR";
+      });
+  }
 
   // KPI 2 - ESTILO MAIS POPULAR ENTRE OS USUÁRIOS
 
@@ -181,7 +180,7 @@
       })
       .then(dados => {
         if (dados && dados.length > 0) {
-          document.getElementById('mostCommonStyleSpan').innerHTML = `<br>${dados[0].estilo}`;
+          document.getElementById('mostCommonStyleSpan').innerHTML = `${dados[0].estilo}`;
         } else {
           document.getElementById('mostCommonStyleSpan').innerHTML = "Sem dados";
         }
@@ -206,10 +205,10 @@
 
   const outfitRandomizer = {
     "Esportivo": {
-      cabeca: [],
-      superior: [],
-      inferior: [],
-      pes: []
+      cabeca: ["./styles/roupas/bone-sportwear-1.jpg", "./styles/roupas/bone-sportwear-2.jpg", "./styles/roupas/bone-sportwear-3.jpg"],
+      superior: ["./styles/roupas/camiseta-sportwear-1.jpg", "./styles/roupas/camiseta-sportwear-2.jpg", "./styles/roupas/camiseta-sportwear-3.jpg"],
+      inferior: ["./styles/roupas/calca-sportwear-1.jpg", "./styles/roupas/calca-sportwear-2.jpg", "./styles/roupas/calca-sportwear-3.jpg"],
+      pes: ["./styles/roupas/tenis-sportwear-1.jpg", "./styles/roupas/calca-sportwear-2.jpg", "./styles/roupas/calca-sportwear-3.jpg"]
     },
     "Tradicional": {
       cabeca: [],

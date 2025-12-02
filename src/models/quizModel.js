@@ -42,7 +42,7 @@ function searchUserStyle(idUsuario) {
   var instrucaoSql = `
   select
       e.nome as estilo,
-      r.idResultadoo,
+      r.idResultado,
       r.fkUsuario
   from resultado r
   join estilo e on r.fkEstilo = e.idEstilo

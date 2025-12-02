@@ -68,7 +68,7 @@ function searchMostPopularStyle(req, res) {
 }
 
 function searchUserStyle (req, res) {
-  var idUsuario = req.paramss.idUsuario;
+  var idUsuario = req.params.idUsuario;
 
   if (idUsuario == undefined) {
     res.status(400).send("ID do usuário não fornecido!");
