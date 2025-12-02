@@ -4,144 +4,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>URBANO. | QUIZ.</title>
+    <title>Exemplo - Quiz</title>
+    <link rel="stylesheet" href="./styles/style.css">
 </head>
 
-<body>
-    <div class="container">
-        <span>DESCUBRA SEU ESTILO</span>
-        <div id="quiz"></div>
-        <button id="nextButton" onclick="nextQuestion()">COMEÇAR QUIZ</button>
+
+<body onload="onloadEsconder()">
+    <div id="startQuiz">
+        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+
+        <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
+            <div id="finalStyleScore" class="flex-colunar padding-8">
+                <span class="width-fit-content" style="font-size: 20px;">
+                    Seu estilo predominante é: <br>
+                    <span id="spanPontuacaoFinal" style="font-weight: bold; font-size: 30px;">***</span>
+                </span>
+                <span id="msgFinal" class="width-fit-content">***</span>
+            </div>
+        </div>
+
+        <div id="jogo" class="width-fit-content flex-colunar border-secondary">
+
+            <div id="infoQuestao" class="padding-8">
+                <span>Questão atual: <span id="ActualQuestionNumberSpan"></span> de <span id="qtdQuestoes"></span>
+                    questões.</span>
+            </div>
+
+            <div id="perguntaDaQuestaoAtual" class="padding-8">
+                <span id="spanQuestaoExibida" class="text-bold"></span>
+            </div>
+
+            <div id="infoAlternativas" class="padding-8">
+                <span><em>Escolha uma opção dentre as abaixo:</em></span>
+            </div>
+
+            <div id="opcoes" class="flex-colunar padding-8">
+                <span>
+                    <input type="radio" id="primeiraOpcao" name="option" class="radio" value="alternativaA" />
+                    <label for="primeiraOpcao" class="option" id="labelOpcaoUm"></label>
+                </span>
+                <span>
+                    <input type="radio" id="segundaOpcao" name="option" class="radio" value="alternativaB" />
+                    <label for="segundaOpcao" class="option" id="labelOpcaoDois"></label>
+                </span>
+                <span>
+                    <input type="radio" id="terceiraOpcao" name="option" class="radio" value="alternativaC" />
+                    <label for="terceiraOpcao" class="option" id="labelOpcaoTres"></label>
+                </span>
+                <span>
+                    <input type="radio" id="quartaOpcao" name="option" class="radio" value="alternativaD" />
+                    <label for="quartaOpcao" class="option" id="labelOpcaoQuatro"></label>
+                </span>
+                <span>
+                    <input type="radio" id="quintaOpcao" name="option" class="radio" value="alternativaE" />
+                    <label for="quintaOpcao" class="option" id="labelOpcaoCinco"></label>
+                </span>
+            </div>
+
+            <div id="botoes" class="flex-colunar padding-8">
+                <button onclick="submit()" id="btnSubmit">submit resposta</button>
+                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
+                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
+                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+            </div>
+
+        </div>
     </div>
 </body>
 
 </html>
 <script>
-    var quizData = [
-        {
-            question: "1. O que é indispensável em uma peça de roupa para você?",
-            options: [
-                {letter: "A", awnser: "Conforto absoluto e praticidade.", "sporty_points": 2, "creative_points": 1},
-                {letter: "B", awnser: "Qualidade impecável, durabilidade e bom acabamento.", "classy_points": 2, "traditional_points": 1},
-                {letter: "C", awnser: "Suavidade, leveza e detalhes delicados.", "romantic_points": 2},
-                {letter: "D", awnser: "Impacto visual, força e um corte que transmita confiança.", "dramatic_points": 2, "sexy_points": 1},
-                {letter: "E", awnser: "Originalidade; algo que represente o meu mood do dia.", "creative_points": 2, "dramatic_points": 1}
-            ]
-        },
-        {
-            question: "2. Qual paleta de cores domina o seu guarda-roupa?",
-            options: [
-                {letter: "A", awnser: "Cores neutras e naturais (branco, cinza, bege, azul-marinho).", "sporty_points": 2, "classy_points": 1},
-                {letter: "B", awnser: "Cores sóbrias, discretas e fechadas.", "traditional_points": 2, "classy_points": 1},
-                {letter: "C", awnser: "Tons pastéis e cores claras/suaves.", "romantic_points": 2},
-                {letter: "D", awnser: "Cores intensas, fortes e contrastantes.", "sexy_points": 2, "dramatic_points": 1},
-                {letter: "E", awnser: "Uma mistura livre de cores vibrantes e combinações inusitadas.", "creative_points": 2}
-            ]
-        },
-        {
-            question: "3. Quando o assunto é sapatos, o que você escolhe para o dia a dia?",
-            options: [
-                {letter: "A", awnser: "Tênis, calçados planos e anatômicos.", "sporty_points": 2},
-                {letter: "B", awnser: "Mocassins, sapatos clássicos de couro ou bico fechado.", "traditional_points": 2, "classy_points": 1},
-                {letter: "C", awnser: "Sapatilhas delicadas ou modelos discretos.", "romantic_points": 2},
-                {letter: "D", awnser: "Botas de verniz, sapatos de design arrojado ou saltos imponentes.", "dramatic_points": 2, "sexy_points": 1},
-                {letter: "E", awnser: "Sapatos com designs artísticos, coloridos ou com formatos diferentes.", "creative_points": 2}
-            ]
-        },
-        {
-            question: "4. Como você lida com o seu cabelo e cuidados com o rosto?",
-            options: [
-                {letter: "A", awnser: "Praticidade total: visual natural e fácil de manter.", "sporty_points": 2},
-                {letter: "B", awnser: "Impecável: sempre alinhado e com corte em dia.", "classy_points": 2, "traditional_points": 1},
-                {letter: "C", awnser: "Suave: visual leve e com movimento natural.", "romantic_points": 2},
-                {letter: "D", awnser: "Marcante: cortes modernos ou visual de impacto.", "dramatic_points": 2, "sexy_points": 1},
-                {letter: "E", awnser: "Original: gosto de mudar, usar cores ou acessórios.", "creative_points": 2}
-            ]
-        },
-        {
-            question: "5. Qual destes acessórios ou complementos não pode faltar?",
-            options: [
-                {letter: "A", awnser: "Mochila funcional, smartwatch ou itens práticos.", "sporty_points": 2},
-                {letter: "B", awnser: "Relógio clássico, cinto de couro ou itens de marca discreta.", "traditional_points": 2, "classy_points": 1},
-                {letter: "C", awnser: "Acessórios sutis, com significado pessoal ou design leve.", "romantic_points": 2},
-                {letter: "D", awnser: "Óculos grandes, metais pesados ou itens que chamem atenção.", "dramatic_points": 2, "sexy_points": 1},
-                {letter: "E", awnser: "Peças artesanais, vintage ou com design artístico.", "creative_points": 2}
-            ]
-        },
-        {
-            question: "6. Se você fosse convidado para um evento social importante, o que vestiria?",
-            options: [
-                {letter: "A", awnser: "Algo que não me aperte e me deixe à vontade.", "sporty_points": 2},
-                {letter: "B", awnser: "Alfaiataria impecável (terno ou blazer) bem cortada e alinhada.", "classy_points": 2, "traditional_points": 1},
-                {letter: "C", awnser: "Tecidos leves, cores suaves e caimento fluido.", "romantic_points": 2},
-                {letter: "D", awnser: "Visual estruturado, cores escuras ou cortes modernos de impacto.", "dramatic_points": 2, "sexy_points": 1},
-                {letter: "E", awnser: "Uma combinação ousada de peças ou um design inovador.", "creative_points": 2, "dramatic_points": 1}
-            ]
-        },
-        {
-            question: "7. O que você prefere em relação a estampas e texturas?",
-            options: [
-                {letter: "A", awnser: "Prefiro lisos ou listras simples e casuais.", "sporty_points": 2, "traditional_points": 1},
-                {letter: "B", awnser: "Gosto das clássicas: xadrez discreto ou risca de giz.", "traditional_points": 2, "classy_points": 1},
-                {letter: "C", awnser: "Estampas pequenas, discretas ou texturas suaves ao toque.", "romantic_points": 2},
-                {letter: "D", awnser: "Alto contraste, formas geométricas grandes ou texturas marcantes.", "dramatic_points": 2, "sexy_points": 1},
-                {letter: "E", awnser: "Mix de estampas, gráficos artísticos ou étnicos.", "creative_points": 2}
-            ]
-        },
-        {
-            question: "8. Qual mensagem você quer passar com sua imagem?",
-            options: [
-                {letter: "A", awnser: "Sou acessível, descomplicado e leve.", "sporty_points": 2},
-                {letter: "B", awnser: "Sou profissional, confiável e sério.", "traditional_points": 2, "classy_points": 1},
-                {letter: "C", awnser: "Sou empático, calmo e acolhedor.", "romantic_points": 2},
-                {letter: "D", awnser: "Sou forte, intenso e autoconfiante.", "sexy_points": 2, "dramatic_points": 1},
-                {letter: "E", awnser: "Sou criativo, livre e tenho personalidade única.", "creative_points": 2}
-            ]
-        },
-        {
-            question: "9. O que mais te incomoda em um visual?",
-            options: [
-                {letter: "A", awnser: "Roupas apertadas, tecidos rígidos ou que pinicam.", "sporty_points": 2},
-                {letter: "B", awnser: "Parecer desleixado ou usar algo com acabamento ruim.", "classy_points": 2, "traditional_points": 1},
-                {letter: "C", awnser: "Visuais muito agressivos, pesados ou frios.", "romantic_points": 2},
-                {letter: "D", awnser: "Passar despercebido ou parecer sem sal na multidão.", "dramatic_points": 2, "sexy_points": 1},
-                {letter: "E", awnser: "Estar vestido igual a todo mundo (uniformizado).", "creative_points": 2}
-            ]
-        },
-        {
-            question: "10. O que define sua decisão de compra?",
-            options: [
-                {letter: "A", awnser: "Funcionalidade: serve para várias coisas e é confortável?", "sporty_points": 2},
-                {letter: "B", awnser: "Custo-benefício: é uma peça durável que vale o investimento?", "traditional_points": 2, "classy_points": 1},
-                {letter: "C", awnser: "Conexão: a peça me traz uma sensação boa e acolhedora?", "romantic_points": 2},
-                {letter: "D", awnser: "Poder: a peça me faz sentir mais confiante e forte?", "sexy_points": 2, "dramatic_points": 1},
-                {letter: "E", awnser: "Exclusividade: é algo diferente que ninguém tem igual?", "creative_points": 2}
-            ]
-        }
-    ];
+    console.log("Verificando sessão...");
+    console.log("ID_USUARIO:", sessionStorage.ID_USUARIO);
+    console.log("NOME_USUARIO:", sessionStorage.NOME_USUARIO);
     
-    var totalPoints = {
-        sporty_points: 0,
-        classy_points: 0,
-        traditional_points: 0,
-        romantic_points: 0,
-        dramatic_points: 0,
-        sexy_points: 0,
-        creative_points: 0
+    if (!sessionStorage.ID_USUARIO) {
+        alert("Você precisa estar logado para fazer o quiz!");
+        window.location.href = "./login.html";
     }
 
-    function calculatePoints(respostas, quiz) {
-        respostas.forEach((iAwnser, iQuestion) => {
-            var actualQuestion = quiz[iQuestion];
-            var selectedOption = actualQuestion.options[iAwnser];
+    var listaDeQuestoes = [
 
-            totalPoints.sporty_points += selectedOption.sporty_points;
-            totalPoints.classy_points += selectedOption.classy_points;
-            totalPoints.traditional_points += selectedOption.traditional_points;
-            totalPoints.romantic_points += selectedOption.romantic_points;
-            totalPoints.dramatic_points += selectedOption.dramatic_points;
-            totalPoints.sexy_points += selectedOption.sexy_points;
-            totalPoints.creative_points += selectedOption.creative_points;
-        } 
-    )}
+        {
+            pergunta: "1. O que é indispensável em uma peça de roupa para você?",
+            alternativaA: "Conforto absoluto e praticidade.",
+            alternativaB: "Qualidade impecável, durabilidade e bom acabamento.",
+            alternativaC: "Suavidade, leveza e detalhes delicados.",
+            alternativaD: "Impacto visual, força e um corte que transmita confiança.",
+            alternativaE: "Originalidade; algo que represente o meu mood do dia."
+        },
+
+        {
+            pergunta: "2. Qual paleta de cores domina o seu guarda-roupa?",
+            alternativaA: "Cores neutras e naturais (branco, cinza, bege, azul-marinho).",
+            alternativaB: "Cores sóbrias, discretas e fechadas.",
+            alternativaC: "Tons pastéis e cores claras/suaves.",
+            alternativaD: "Cores intensas, fortes e contrastantes.",
+            alternativaE: "Uma mistura livre de cores vibrantes e combinações inusitadas."
+        },
+
+        {
+            pergunta: "3. Quando o assunto é sapatos, o que você escolhe para o dia a dia?",
+            alternativaA: "Tênis, calçados planos e anatômicos.",
+            alternativaB: "Mocassins, sapatos clássicos de couro ou bico fechado.",
+            alternativaC: "Sapatilhas delicadas ou modelos discretos.",
+            alternativaD: "Botas de verniz, sapatos de design arrojado ou saltos imponentes.",
+            alternativaE: "Sapatos com designs artísticos, coloridos ou com formatos diferentes."
+        },
+
+        {
+            pergunta: "4. Como você lida com o seu cabelo e cuidados com o rosto?",
+            alternativaA: "Praticidade total: visual natural e fácil de manter.",
+            alternativaB: "Impecável: sempre alinhado e com corte em dia.",
+            alternativaC: "Suave: visual leve e com movimento natural.",
+            alternativaD: "Marcante: cortes modernos ou visual de impacto.",
+            alternativaE: "Original: gosto de mudar, usar cores ou acessórios."
+        },
+
+        {
+            pergunta: "5. Qual destes acessórios ou complementos não pode faltar?",
+            alternativaA: "Mochila funcional, smartwatch ou itens práticos.",
+            alternativaB: "Relógio clássico, cinto de couro ou itens de marca discreta.",
+            alternativaC: "Acessórios sutis, com significado pessoal ou design leve.",
+            alternativaD: "Óculos grandes, metais pesados ou itens que chamem atenção.",
+            alternativaE: "Peças artesanais, vintage ou com design artístico."
+        },
+
+        {
+            pergunta: "6. Se você fosse convidado para um evento social importante, o que vestiria?",
+            alternativaA: "Algo que não me aperte e me deixe à vontade.",
+            alternativaB: "Alfaiataria impecável (terno ou blazer) bem cortada e alinhada.",
+            alternativaC: "Tecidos leves, cores suaves e caimento fluido.",
+            alternativaD: "Visual estruturado, cores escuras ou cortes modernos de impacto.",
+            alternativaE: "Uma combinação ousada de peças ou um design inovador."
+        },
+
+        {
+            pergunta: "7. O que você prefere em relação a estampas e texturas?",
+            alternativaA: "Prefiro lisos ou listras simples e casuais.",
+            alternativaB: "Gosto das clássicas: xadrez discreto ou risca de giz.",
+            alternativaC: "Estampas pequenas, discretas ou texturas suaves ao toque.",
+            alternativaD: "Alto contraste, formas geométricas grandes ou texturas marcantes.",
+            alternativaE: "Mix de estampas, gráficos artísticos ou étnicos."
+        },
+
+        {
+            pergunta: "8. Qual mensagem você quer passar com sua imagem?",
+            alternativaA: "Sou acessível, descomplicado e leve.",
+            alternativaB: "Sou profissional, confiável e sério.",
+            alternativaC: "Sou empático, calmo e acolhedor.",
+            alternativaD: "Sou forte, intenso e autoconfiante.",
+            alternativaE: "Sou criativo, livre e tenho personalidade única."
+        },
+
+        {
+            pergunta: "9. O que mais te incomoda em um visual?",
+            alternativaA: "Roupas apertadas, tecidos rígidos ou que pinicam.",
+            alternativaB: "Parecer desleixado ou usar algo com acabamento ruim.",
+            alternativaC: "Visuais muito agressivos, pesados ou frios.",
+            alternativaD: "Passar despercebido ou parecer sem sal na multidão.",
+            alternativaE: "Estar vestido igual a todo mundo (uniformizado)."
+        },
+
+        {
+            pergunta: "10. O que define sua decisão de compra?",
+            alternativaA: "Funcionalidade: serve para várias coisas e é confortável?",
+            alternativaB: "Custo-benefício: é uma peça durável que vale o investimento?",
+            alternativaC: "Conexão: a peça me traz uma sensação boa e acolhedora?",
+            alternativaD: "Poder: a peça me faz sentir mais confiante e forte?",
+            alternativaE: "Exclusividade: é algo diferente que ninguém tem igual?"
+        }
+    ]
+
+    // variáveis globais    
+    var actualQuestionNumber = 0
+    var quantidadeDeQuestoes = listaDeQuestoes.length
+
+    var pontuacao = {
+        "ESPORTIVO": 0,
+        "ELEGANTE": 0,
+        "TRADICIONAL": 0,
+        "ROMÂNTICO": 0,
+        "DRAMÁTICO": 0,
+        "SEXY": 0,
+        "CRIATIVO": 0
+    }
+
+    function onloadEsconder() {
+        document.getElementById('pontuacao').style.display = "none";
+        document.getElementById('jogo').style.display = "none";
+    }
+
+    function iniciarQuiz() {
+        document.getElementById('pontuacao').style.display = "flex";
+        document.getElementById('jogo').style.display = "flex";
+        document.getElementById('btnIniciarQuiz').style.display = "none";
+        document.getElementById('finalStyleScore').style.display = "none";
+
+        document.getElementById('qtdQuestoes').innerHTML = quantidadeDeQuestoes;
+
+        preencherHTMLcomQuestaoAtual(0);
+
+        btnSubmit.disabled = false;
+        btnProx.disabled = true;
+        btnTentarNovamente.disabled = true;
+    }
+
+    function preencherHTMLcomQuestaoAtual(index) {
+        habilitarAlternativas(true);
+        var questaoAtual = listaDeQuestoes[index];
+        actualQuestionNumber = index;
+
+        document.getElementById("ActualQuestionNumberSpan").innerHTML = Number(index) + 1
+        document.getElementById("spanQuestaoExibida").innerHTML = questaoAtual.pergunta;
+
+        document.getElementById("labelOpcaoUm").innerHTML = questaoAtual.alternativaA;
+        document.getElementById("labelOpcaoDois").innerHTML = questaoAtual.alternativaB;
+        document.getElementById("labelOpcaoTres").innerHTML = questaoAtual.alternativaC;
+        document.getElementById("labelOpcaoQuatro").innerHTML = questaoAtual.alternativaD;
+        document.getElementById("labelOpcaoCinco").innerHTML = questaoAtual.alternativaE;
+
+    }
+
+    function submit() {
+        var options = document.getElementsByName("option");
+        var hasChecked = false
+
+        for (var i = 0; i < options.length; i++) {
+            if (options[i].checked) {
+                hasChecked = true
+                break
+            }
+        }
+
+        if (!hasChecked) {
+            alert("Não há alternativas escolhidas. Escolha uma opção.")
+        } else {
+            btnSubmit.disabled = true
+            btnProx.disabled = false
+
+            habilitarAlternativas(false)
+
+            sumPoints()
+        }
+    }
+
+    function habilitarAlternativas(trueOrFalse) {
+        var selectedOption = trueOrFalse ? false : true;
+        document.getElementById('primeiraOpcao').disabled = selectedOption;
+        document.getElementById('segundaOpcao').disabled = selectedOption;
+        document.getElementById('terceiraOpcao').disabled = selectedOption;
+        document.getElementById('quartaOpcao').disabled = selectedOption;
+        document.getElementById('quintaOpcao').disabled = selectedOption;
+    }
+
+    function avancar() {
+        btnProx.disabled = true
+        btnSubmit.disabled = false
+
+        desmarcarRadioButtons()
+
+        if (actualQuestionNumber < quantidadeDeQuestoes - 1) {
+            preencherHTMLcomQuestaoAtual(actualQuestionNumber + 1)
+        } else {
+            finalizarJogo()
+        }
+    }
+
+    function tentarNovamente() {
+        window.location.reload()
+    }
+
+    function sumPoints() {
+        var options = document.getElementsByName("option"); // recupera alternativas no html
+
+        var valorEscolhido = "" // variável para armazenar a alternativa correta
+
+        for (var option of options) {
+            if (option.checked) {
+                valorEscolhido = option.value;
+            }
+        }
+
+        if (valorEscolhido === "alternativaA") {
+            pontuacao.Esportivo += 2;
+            pontuacao.Criativo += 1;
+        } else if (valorEscolhido === "alternativaB") {
+            pontuacao.Tradicional += 2;
+            pontuacao.Elegante += 1;
+        } else if (valorEscolhido === "alternativaC") {
+            pontuacao.Romântico += 2;
+            pontuacao.Elegante += 1;
+        } else if (valorEscolhido === "alternativaD") {
+            pontuacao.Magnético += 2;
+            pontuacao.Dramático += 1;
+        } else if (valorEscolhido === "alternativaE") {
+            pontuacao.Criativo += 2;
+            pontuacao.Dramático += 1;
+        }
+    }
+
+    function desmarcarRadioButtons() {
+        var options = document.getElementsByName("option");
+        for (var i = 0; i < options.length; i++) {
+            options[i].checked = false;
+        }
+    }
+
+    function finalizarJogo() {
+        document.getElementById('jogo').style.display = "none";
+        document.getElementById('finalStyleScore').style.display = "flex";
+
+        var estiloVencedor = "";
+        var maiorPontuacao = -1;
+
+        for (var estilo in pontuacao) {
+            if (pontuacao[estilo] > maiorPontuacao) {
+                maiorPontuacao = pontuacao[estilo];
+                estiloVencedor = estilo;
+            }
+        }
+
+        document.getElementById('spanPontuacaoFinal').innerHTML = estiloVencedor
+        document.getElementById('msgFinal').innerHTML = "Esse estilo combina com sua personalidade!";
+        document.getElementById('btnTentarNovamente').disabled = false
+
+        saveResults(estiloVencedor);
+    }
+
+    function saveResults(estiloTexto) {
+        var yourStyle = {
+            "ESPORTIVO": 1000,
+            "TRADICIONAL": 1001,
+            "ELEGANTE": 1002,
+            "ROMÂNTICO": 1003,
+            "MAGNÉTICO": 1004,
+            "CRIATIVO": 1005,
+            "DRAMÁTICO": 1006
+        };
+
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var idEstilo = yourStyle[estiloTexto];
+
+        console.log("=== DEBUG SAVE RESULTS ===");
+        console.log("Estilo texto:", estiloTexto);
+        console.log("ID Usuario (sessionStorage):", idUsuario);
+        console.log("ID Estilo (mapeado):", idEstilo);
+        console.log("Objeto que será enviado:", {
+            idUsuarioServer: idUsuario,
+            idEstiloServer: idEstilo
+    });
+
+        if (idUsuario && idEstilo) {
+            fetch("/quiz/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    idUsuarioServer: idUsuario,
+                    idEstiloServer: idEstilo
+                })
+            }).then(resposta => {
+                if (resposta.ok) {
+                    console.log("Salvo no banco com sucesso!");
+                }
+            }).catch(erro => {
+                console.error("Erro no fetch:", erro);
+            });
+        } else {
+            console.error("ERRO: Dados inválidos!");
+            console.error("idUsuario:", idUsuario, "- idEstilo:", idEstilo);
+        }
+    };
 </script>

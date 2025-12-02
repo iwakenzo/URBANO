@@ -5,15 +5,23 @@ function registerResult(req, res) {
   var idUsuario = req.body.idUsuarioServer;
   var idEstilo = req.body.idEstiloServer;
 
+  console.log("Dados recebidos:");
+  console.log("idUsuario:", idUsuario);
+  console.log("idEstilo:", idEstilo);
+  console.log("req.body completo:", req.body);
+
   if (idUsuario == undefined) {
-    req.status(400).send("Seu idUsuario está undefined!");
+    res.status(400).send("Seu idUsuario está undefined!");
   } else if (idEstilo == undefined) {
-    req.status(400).send("Seu idEstilo está undefined!");
+    res.status(400).send("Seu idEstilo está undefined!");
   } else {
     quizModel
       .registerResult(idUsuario, idEstilo)
       .then(function (result) {
-        res.json(result);
+        res.status(200).json({
+          mensagem: "Resultado registrado com sucesso!",
+          idResultado: result.insertId
+        });
       })
       .catch(function (error) {
         console.log(error);

@@ -11,7 +11,7 @@ function registerResult(idUsuario, idEstilo) {
 function searchGeneralMeasurements() {
   var instrucaoSql = `
     select
-        e.nome as estilo
+        e.nome as estilo,
         count(r.idResultado) as contagem
     from resultado r
     join estilo e on r.fkEstilo = e.idEstilo
@@ -25,7 +25,7 @@ function searchGeneralMeasurements() {
 function searchMostPopularStyle() {
   var instrucaoSql = `
     select
-        e.nome as estilo
+        e.nome as estilo,
         count(r.idResultado) as contagem
     from resultado r
     join estilo e on r.fkEstilo = e.idEstilo
