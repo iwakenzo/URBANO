@@ -2,7 +2,7 @@ var database = require("../database/config");
 
 function registerResult(idUsuario, idEstilo) {
   var instrucaoSql = `
-    insert into resultado (fkUsuario, fkEstilo) values (${idUsuario}, ${idEstilo})
+    insert into resultado (fkUsuario, fkEstilo) values ('${idUsuario}', '${idEstilo}');
     `;
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);
@@ -38,8 +38,25 @@ function searchMostPopularStyle() {
   return database.executar(instrucaoSql);
 }
 
+function searchUserStyle(idUsuario) {
+  var instrucaoSql = `
+  select
+      e.nome as estilo,
+      r.idResultadoo,
+      r.fkUsuario
+  from resultado r
+  join estilo e on r.fkEstilo = e.idEstilo
+  where r.fkUsuario = '${idUsuario}'
+  order by r.idResultado desc
+  limit 1;
+  `;
+  console.log("Executando a instrução SQL: \n" + instrucaoSql);
+  return database.executar(instrucaoSql);
+}
+
 module.exports = {
   registerResult,
   searchGeneralMeasurements,
   searchMostPopularStyle,
+  searchUserStyle
 };

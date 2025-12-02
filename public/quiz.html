@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exemplo - Quiz</title>
+    <title>URBANO. | QUIZ. </title>
     <link rel="stylesheet" href="./styles/style.css">
 </head>
 
@@ -181,13 +181,13 @@
     var quantidadeDeQuestoes = listaDeQuestoes.length
 
     var pontuacao = {
-        "ESPORTIVO": 0,
-        "ELEGANTE": 0,
-        "TRADICIONAL": 0,
-        "ROMÂNTICO": 0,
-        "DRAMÁTICO": 0,
+        "Esportivo": 0,
+        "Elegante": 0,
+        "Tradicional": 0,
+        "Romantico": 0,
         "SEXY": 0,
-        "CRIATIVO": 0
+        "Criativo": 0,
+        "Dramatico": 0
     }
 
     function onloadEsconder() {
@@ -293,14 +293,14 @@
             pontuacao.Tradicional += 2;
             pontuacao.Elegante += 1;
         } else if (valorEscolhido === "alternativaC") {
-            pontuacao.Romântico += 2;
+            pontuacao.Romantico += 2;
             pontuacao.Elegante += 1;
         } else if (valorEscolhido === "alternativaD") {
-            pontuacao.Magnético += 2;
-            pontuacao.Dramático += 1;
+            pontuacao.Sexy += 2;
+            pontuacao.Dramatico += 1;
         } else if (valorEscolhido === "alternativaE") {
             pontuacao.Criativo += 2;
-            pontuacao.Dramático += 1;
+            pontuacao.Dramatico += 1;
         }
     }
 
@@ -334,13 +334,13 @@
 
     function saveResults(estiloTexto) {
         var yourStyle = {
-            "ESPORTIVO": 1000,
-            "TRADICIONAL": 1001,
-            "ELEGANTE": 1002,
-            "ROMÂNTICO": 1003,
-            "MAGNÉTICO": 1004,
-            "CRIATIVO": 1005,
-            "DRAMÁTICO": 1006
+            "Esportivo": 1000,
+            "Tradicional": 1001,
+            "Elegante": 1002,
+            "Romantico": 1003,
+            "Sexy": 1004,
+            "Criativo": 1005,
+            "Dramatico": 1006
         };
 
         var idUsuario = sessionStorage.ID_USUARIO;

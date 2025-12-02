@@ -1,176 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>URBANO. | DASHBOARD.</title>
-    <link rel="stylesheet" href="./styles/dashboard.css" />
-    <script src="./js/sessao.js"></script>
 
-    <!-- Import do chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>URBANO. | DASHBOARD.</title>
+  <link rel="stylesheet" href="./styles/dashboard.css" />
+  <script src="./js/sessao.js"></script>
 
-    <!-- Fontes utilizadas -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="header">
-      <div class="container">
-        <div class="logo">
-          <a href="index.html"
-            ><img
-              width="315"
-              height="93"
-              src="./assets/logo_alt2.png"
-              alt="logo do site"
-          /></a>
-          <p class="subtitle">
-            COOL KIDS DISCOVER <br />
-            THEMSELVES.
-          </p>
+  <!-- Import do chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Fontes utilizadas -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="header">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html"><img width="315" height="93" src="./assets/logo_alt2.png" alt="logo do site" /></a>
+        <p class="subtitle">
+          COOL KIDS DISCOVER <br />
+          THEMSELVES.
+        </p>
+      </div>
+      <div class="links-header">
+        <nav class="nav-bar">
+          <input type="checkbox" id="burger" onchange="burger_menu()">
+          <label class="burger" for="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </label>
+          <div class="offscreenmenu">
+            <ul>
+              <li><a class="menu_item" href="./quiz.html">QUIZ</a></li>
+              <li><a class="menu_item" href="./index.html">SAIR</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="dashboard">
+      <div class="simple-kpis">
+        <div class="your-style">
+          <span>SEU ESTILO É:
+            <span id="yourStyleSpan" class="yourStyleKPI"></span>
+          </span>
         </div>
-        <div class="links-header">
-          <nav class="nav-bar">
-            <input type="checkbox" id="burger" onchange="burger_menu()" />
-            <label class="burger" for="burger">
-              <span></span>
-              <span></span>
-              <span></span>
-            </label>
-            <div class="offscreenmenu">
-              <ul>
-                <li><a class="menu_item" href="./quiz.html">QUIZ</a></li>
-                <li><a class="menu_item" href="./index.html">SAIR</a></li>
-              </ul>
-            </div>
-          </nav>
+        <div class="kpi2">
+          <span>ESTILO MAIS COMUM <br />
+            ENTRE OS USUÁRIOS: <span id="mostCommonStyleSpan" class="mostCommonStyleKPI"></span>
+          </span>
+        </div>
+        <div class="kpi3">
+          <span>SEU OUTFIT:</span>
+        </div>
+      </div>
+      <div class="chart-box">
+        <div class="chart">
+          <canvas id="myChart"></canvas>
         </div>
       </div>
     </div>
-    <div class="content">
-      <div class="dashboard">
-        <div class="simple-kpis">
-          <div class="your-style">
-            <span>SEU ESTILO É:
-              <span id="yourStyleSpan" class="yourStyleKPI"></span>
-            </span>
-          </div>
-          <div class="kpi2">
-            <span
-              >ESTILO MAIS COMUM <br />
-              ENTRE OS USUÁRIOS:</span
-            >
-          </div>
-          <div class="kpi3">
-            <span>SEU OUTFIT:</span>
-          </div>
-        </div>
-        <div class="chart-box">
-          <div class="chart">
-            <canvas id="myChart"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-  </body>
+  </div>
+</body>
+
 </html>
 <script>
+  console.log("Verificando sessão...");
+  console.log("ID_USUARIO:", sessionStorage.ID_USUARIO);
+  console.log("NOME_USUARIO:", sessionStorage.NOME_USUARIO);
 
-function loadDashboard() {
-  kpi1();
-  kpi2();
-  kpi3();
-}
-
-// CONFIGURAÇÃO CHART.JS
-
- const ctx = document.getElementById('myChart');
-
-new Chart(ctx, {
-  type: 'doughnut',
-  data: {
-    labels: ['Esportivo', 'Tradicional', 'Elegante', 'Sexy', 'Romântico', 'Criativo', 'Dramático'],
-    datasets: [{
-      data: [12, 19, 3, 7, 9, 4, 8],
-      backgroundColor: [
-        '#A8DADC', // Esportivo (Azul claro)
-        '#1D3557', // Tradicional (Azul escuro)
-        '#F1FAEE', // Elegante (Off-white/Cinza)
-        '#E63946', // Magnético (Vermelho)
-        '#FFC8DD', // Romântico (Rosa)
-        '#FFB703', // Criativo (Amarelo)
-        '#000000'  // Dramático (Preto)
-      ],
-      borderWidth: 1
-    }]
+  if (!sessionStorage.ID_USUARIO) {
+    alert("Você precisa estar logado para fazer o quiz!");
+    window.location.href = "./login.html";
   }
-});
 
-// KPI 1 - SEU ESTILO
+  function loadChart() {
+    fetch("/quiz/general-chart", {
+      method: "GET"
+    })
+      .then(resposta => resposta.json())
+      .then(dados => {
+        console.log("Dados recebidos:", dados);
 
-function kpi1() {
-  yourStyleSpan.innerHTML = result
-}
+        var labels = [];
+        var valores = [];
 
-// KPI 2 - ESTILO MAIS POPULAR ENTRE OS USUÁRIOS
+        dados.forEach(item => {
+          labels.push(item.estilo);
+          valores.push(item.contagem);
+        });
 
-function kpi2() {
-
-}
-
-// KPI 3 - SEU OUTFIT
-
-const outfitRandomizer = {
-  "Esportivo": {
-    cabeca: [], 
-    superior: [],
-    inferior: [],
-    pes: []
-  },
-  "Tradicional": {
-    cabeca: [],
-    superior: [],
-    inferior: [],
-    pes: []
-  },
-  "Elegante": {
-    cabeca: [],
-    superior: [],
-    inferior: [],
-    pes: []
-  },
-  "Romântico": {
-    cabeca: [],
-    superior: [],
-    inferior: [],
-    pes: []
-  },
-  "Sexy": {
-    cabeca: [],
-    superior: [],
-    inferior: [],
-    pes: []
-  },
-  "Criativo": {
-    cabeca: [],
-    superior: [],
-    inferior: [],
-    pes: []
-  },
-  "Dramático": {
-    cabeca: [],
-    superior: [],
-    inferior: [],
-    pes: []
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: labels,
+            datasets: [{
+              data: valores,
+              backgroundColor: [
+                '#A8DADC', // Esportivo
+                '#1D3557', // Tradicional
+                '#F1FAEE', // Elegante
+                '#E63946', // Magnético
+                '#FFC8DD', // Romântico
+                '#FFB703', // Criativo
+                '#000000'  // Dramático
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            plugins: {
+              legend: {
+                position: 'bottom'
+              }
+            }
+          }
+        });
+      })
+      .catch(erro => {
+        console.error("Erro ao carregar dados:", erro);
+      });
   }
+
+  window.onload = function () {
+    loadChart();
+    loadKPIs();
+  };
+  // KPI 1 - SEU ESTILO
+
+  function kpi1() {
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    fetch(`/quiz/user-style/${idUsuario}`, {
+    method: "GET"
+  })
+  .then(resposta => {
+      if (resposta.status === 204) {
+        document.getElementById('yourStyleSpan').innerHTML = "FAÇA O QUIZ PRIMEIRO!";
+        return null;
+      }
+      if (!resposta.ok) {
+        throw new Error('Erro ao buscar seu estilo');
+      }
+      return resposta.json();
+    })
+    .then(dados => {
+      if (dados && dados.length > 0) {
+        document.getElementById('yourStyleSpan').innerHTML = dados[0].estilo;
+      }
+    })
+    .catch(erro => {
+      console.error("Erro KPI1:", erro);
+      document.getElementById('yourStyleSpan').innerHTML = "<br>ERRO AO CARREGAR";
+    });
 }
+
+  // KPI 2 - ESTILO MAIS POPULAR ENTRE OS USUÁRIOS
+
+  function kpi2() {
+    fetch("/quiz/most-popular", {
+      method: "GET"
+    })
+      .then(resposta => {
+        if (!resposta.ok) {
+          throw new Error('Erro ao buscar estilo mais popular');
+        }
+        return resposta.json();
+      })
+      .then(dados => {
+        if (dados && dados.length > 0) {
+          document.getElementById('mostCommonStyleSpan').innerHTML = `<br>${dados[0].estilo}`;
+        } else {
+          document.getElementById('mostCommonStyleSpan').innerHTML = "Sem dados";
+        }
+      })
+      .catch(erro => {
+        console.error("Erro KPI2:", erro);
+        document.getElementById('mostCommonStyleSpan').innerHTML = "Erro ao carregar";
+      });
+  }
+
+  function loadKPIs() {
+    kpi1();
+    kpi2();
+  }
+
+  window.onload = function () {
+    console.log("Dashboard carregado!");
+    loadChart();
+    loadKPIs();
+  }
+  // KPI 3 - SEU OUTFIT
+
+  const outfitRandomizer = {
+    "Esportivo": {
+      cabeca: [],
+      superior: [],
+      inferior: [],
+      pes: []
+    },
+    "Tradicional": {
+      cabeca: [],
+      superior: [],
+      inferior: [],
+      pes: []
+    },
+    "Elegante": {
+      cabeca: [],
+      superior: [],
+      inferior: [],
+      pes: []
+    },
+    "Romântico": {
+      cabeca: [],
+      superior: [],
+      inferior: [],
+      pes: []
+    },
+    "Sexy": {
+      cabeca: [],
+      superior: [],
+      inferior: [],
+      pes: []
+    },
+    "Criativo": {
+      cabeca: [],
+      superior: [],
+      inferior: [],
+      pes: []
+    },
+    "Dramático": {
+      cabeca: [],
+      superior: [],
+      inferior: [],
+      pes: []
+    }
+  }
 </script>

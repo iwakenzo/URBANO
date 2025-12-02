@@ -15,4 +15,8 @@ router.get("/most-popular", function (req, res) {
   quizController.searchMostPopularStyle(req, res);
 });
 
+router.get("/user-style/:idUsuario", function (req, res) {
+  quizController.searchUserStyle(req, res);
+})
+
 module.exports = router;

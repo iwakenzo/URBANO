@@ -1,5 +1,4 @@
 var quizModel = require("../models/quizModel");
-const { cadastrar } = require("./usuarioController");
 
 function registerResult(req, res) {
   var idUsuario = req.body.idUsuarioServer;
@@ -64,12 +63,37 @@ function searchMostPopularStyle(req, res) {
     .catch(function (error) {
       console.log(error);
       console.log("Houve um erro ao buscar a KPI.", error.sqlMessage);
-      res.status(500).json(erro.sqlMessage);
+      res.status(500).json(error.sqlMessage);
     });
+}
+
+function searchUserStyle (req, res) {
+  var idUsuario = req.paramss.idUsuario;
+
+  if (idUsuario == undefined) {
+    res.status(400).send("ID do usuário não fornecido!");
+    return;
+  }
+
+  quizModel
+    .searchUserStyle(idUsuario)
+    .then(function (result) {
+      if (result.length > 0) {
+        res.status(200).json(result);
+      } else {
+        res.status(204).send("Usuário ainda não fez o quiz!");
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+      console.log("Houve um erro ao buscar o estilo do usuário.", error.sqlMessage);
+      res.status(500).json(error.sqlMessage);
+    })
 }
 
 module.exports = {
   registerResult,
   searchGeneralMeasurements,
   searchMostPopularStyle,
+  searchUserStyle
 };
