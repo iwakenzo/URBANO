@@ -233,7 +233,7 @@ input#burger:checked ~ label.burger {
     text-align: center;
 }
 
-.yourStyleKPI {
+.your-style-kpi {
     font-size: 34px;
 }
 
@@ -256,7 +256,7 @@ input#burger:checked ~ label.burger {
     text-align: center;
 }
 
-.mostCommonStyleKPI {
+.most-common-style-kpi {
     font-size: 28px;
 }
 
@@ -268,7 +268,9 @@ input#burger:checked ~ label.burger {
     width: 18vw;
     height: 73vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     border-radius: 30px;
     font-family: urbanist;
     font-weight: 800;
@@ -279,6 +281,30 @@ input#burger:checked ~ label.burger {
 }
 
 .kpi3 span {
-    margin-top: 2vh;
     color: #F8F6EB;
+}
+
+.random-fit {
+    background: #F8F6EB;
+    color: #169BD4;
+    height: 8vh;
+    width: 10vw;
+    border-radius: 25px;
+    border: none;
+    font-family: urbanist;
+    font-weight: 800;
+    font-size: 16px;
+    margin-top: 15px;
+    display: block;
+    cursor: pointer;
+}
+
+.outfit-container {
+    gap: 10px;
+    padding: 10px;
+    height: 50vh;
+}
+
+.outfit-container img {
+    height: 70px;
 }

@@ -53,14 +53,16 @@
         <div class="your-style">
           <span>SEU ESTILO É: <br>
           </span>
-          <span id="yourStyleSpan" class="yourStyleKPI"></span>
+          <span id="yourStyleSpan" class="your-style-kpi"></span>
         </div>
         <div class="kpi2">
           <span>ESTILO MAIS COMUM ENTRE OS USUÁRIOS: </span>
-          <span id="mostCommonStyleSpan" class="mostCommonStyleKPI"></span>
+          <span id="mostCommonStyleSpan" class="most-common-style-kpi"></span>
         </div>
         <div class="kpi3">
           <span>SEU OUTFIT:</span>
+          <button onclick="gerarOutfitComEstilo()" id="btnOutfit" class="random-fit">GERAR OUTFIT</button>
+          <div id="outfitDisplay" class="outfit-container"></div>
         </div>
       </div>
       <div class="chart-box">
@@ -79,7 +81,7 @@
   console.log("NOME_USUARIO:", sessionStorage.NOME_USUARIO);
 
   if (!sessionStorage.ID_USUARIO) {
-    alert("Você precisa estar logado para fazer o quiz!");
+    alert("Você precisa estar logado para acessar a dashboard!");
     window.location.href = "./login.html";
   }
 
@@ -92,11 +94,11 @@
         console.log("Dados recebidos:", dados);
 
         var labels = [];
-        var valores = [];
+        var values = [];
 
         dados.forEach(item => {
           labels.push(item.estilo);
-          valores.push(item.contagem);
+          values.push(item.contagem);
         });
 
         const ctx = document.getElementById('myChart');
@@ -105,7 +107,7 @@
           data: {
             labels: labels,
             datasets: [{
-              data: valores,
+              data: values,
               backgroundColor: [
                 '#A8DADC', // Esportivo
                 '#1D3557', // Tradicional
@@ -121,8 +123,23 @@
           options: {
             responsive: true,
             plugins: {
+              title: {
+                display: true,
+                text: 'RESULTADO DE TODOS OS USUÁRIOS',
+                position: 'top',
+                font: {
+                  size: 25,
+                  family: 'urbanist',
+                  weight: '800'
+                },
+                color: '#F8F6EB',
+                padding: {
+                  top: 50,
+                  bottom: 20
+                }
+              },
               legend: {
-                position: 'bottom'
+                position: 'right'
               }
             }
           }
@@ -133,11 +150,7 @@
       });
   }
 
-  window.onload = function () {
-    loadChart();
-    loadKPIs();
-  };
-  // KPI 1 - SEU ESTILO
+  var estiloUsuarioGlobal = null;
 
   function kpi1() {
     var idUsuario = sessionStorage.ID_USUARIO;
@@ -148,6 +161,7 @@
       .then(resposta => {
         if (resposta.status === 204) {
           document.getElementById('yourStyleSpan').innerHTML = "FAÇA O QUIZ PRIMEIRO!";
+          estiloUsuarioGlobal = null;
           return null;
         }
         if (!resposta.ok) {
@@ -157,16 +171,19 @@
       })
       .then(dados => {
         if (dados && dados.length > 0) {
+          var estilo = dados[0].estilo;
           document.getElementById('yourStyleSpan').innerHTML = dados[0].estilo;
+
+          estiloUsuarioGlobal = estilo;
+          console.log("Estilo carregado:", estiloUsuarioGlobal);
         }
       })
       .catch(erro => {
         console.error("Erro KPI1:", erro);
         document.getElementById('yourStyleSpan').innerHTML = "<br>ERRO AO CARREGAR";
+        estiloUsuarioGlobal = null
       });
   }
-
-  // KPI 2 - ESTILO MAIS POPULAR ENTRE OS USUÁRIOS
 
   function kpi2() {
     fetch("/quiz/most-popular", {
@@ -201,50 +218,181 @@
     loadChart();
     loadKPIs();
   }
-  // KPI 3 - SEU OUTFIT
 
-  const outfitRandomizer = {
+  var outfitsPorEstilo = {
     "Esportivo": {
-      cabeca: ["./styles/roupas/bone-sportwear-1.jpg", "./styles/roupas/bone-sportwear-2.jpg", "./styles/roupas/bone-sportwear-3.jpg"],
-      superior: ["./styles/roupas/camiseta-sportwear-1.jpg", "./styles/roupas/camiseta-sportwear-2.jpg", "./styles/roupas/camiseta-sportwear-3.jpg"],
-      inferior: ["./styles/roupas/calca-sportwear-1.jpg", "./styles/roupas/calca-sportwear-2.jpg", "./styles/roupas/calca-sportwear-3.jpg"],
-      pes: ["./styles/roupas/tenis-sportwear-1.jpg", "./styles/roupas/calca-sportwear-2.jpg", "./styles/roupas/calca-sportwear-3.jpg"]
+      superior: ["./assets/roupas/esportivo/camiseta-esportivo-1.jpg", "./assets/roupas/esportivo/camiseta-esportivo-2.jpg", "./assets/roupas/esportivo/camiseta-esportivo-3.jpg"],
+      inferior: ["./assets/roupas/esportivo/calca-esportivo-1.jpg", "./assets/roupas/esportivo/calca-esportivo-2.jpg", "./assets/roupas/esportivo/calca-esportivo-3.jpg"],
+      pes: ["./assets/roupas/esportivo/tenis-esportivo-1.jpg", "./assets/roupas/esportivo/tenis-esportivo-2.jpg", "./assets/roupas/esportivo/tenis-esportivo-3.jpg"]
     },
     "Tradicional": {
-      cabeca: [],
-      superior: [],
-      inferior: [],
-      pes: []
+      superior: ["./assets/roupas/tradicional/camiseta-tradicional-1.jpg", "./assets/roupas/tradicional/camiseta-tradicional-2.jpg", "./assets/roupas/tradicional/camiseta-tradicional-3.jpg"],
+      inferior: ["./assets/roupas/tradicional/calca-tradicional-1.jpg", "./assets/roupas/tradicional/calca-tradicional-2.jpg", "./assets/roupas/tradicional/calca-tradicional-3.jpg"],
+      pes: ["./assets/roupas/tradicional/tenis-tradicional-1.jpg", "./assets/roupas/tradicional/tenis-tradicional-2.jpg", "./assets/roupas/tradicional/tenis-tradicional-3.jpg"]
     },
     "Elegante": {
-      cabeca: [],
-      superior: [],
-      inferior: [],
-      pes: []
+      superior: ["./assets/roupas/elegante/camiseta-elegante-1.jpg", "./assets/roupas/elegante/camiseta-elegante-2.jpg", "./assets/roupas/elegante/camiseta-elegante-3.jpg"],
+      inferior: ["./assets/roupas/elegante/calca-elegante-1.jpg", "./assets/roupas/elegante/calca-elegante-2.jpg", "./assets/roupas/elegante/calca-elegante-3.jpg"],
+      pes: ["./assets/roupas/elegante/tenis-elegante-1.jpg", "./assets/roupas/elegante/tenis-elegante-2.jpg", "./assets/roupas/elegante/tenis-elegante-3.jpg"]
     },
     "Romântico": {
-      cabeca: [],
-      superior: [],
-      inferior: [],
-      pes: []
+      superior: ["./assets/roupas/romantico/camiseta-romantico-1.jpg", "./assets/roupas/romantico/camiseta-romantico-2.jpg", "./assets/roupas/romantico/camiseta-romantico-3.jpg"],
+      inferior: ["./assets/roupas/romantico/calca-romantico-1.jpg", "./assets/roupas/romantico/calca-romantico-2.jpg", "./assets/roupas/romantico/calca-romantico-3.jpg"],
+      pes: ["./assets/roupas/romantico/tenis-romantico-1.jpg", "./assets/roupas/romantico/tenis-romantico-2.jpg", "./assets/roupas/romantico/tenis-romantico-3.jpg"]
     },
-    "Sexy": {
-      cabeca: [],
-      superior: [],
-      inferior: [],
-      pes: []
+    "Magnético": {
+      superior: ["./assets/roupas/sexy/camiseta-sexy-1.jpg", "./assets/roupas/sexy/camiseta-sexy-2.jpg", "./assets/roupas/sexy/camiseta-sexy-3.jpg"],
+      inferior: ["./assets/roupas/sexy/calca-sexy-1.jpg", "./assets/roupas/sexy/calca-sexy-2.jpg", "./assets/roupas/sexy/calca-sexy-3.jpg"],
+      pes: ["./assets/roupas/sexy/tenis-sexy-1.jpg", "./assets/roupas/sexy/tenis-sexy-2.jpg", "./assets/roupas/sexy/tenis-sexy-3.jpg"]
     },
     "Criativo": {
-      cabeca: [],
-      superior: [],
-      inferior: [],
-      pes: []
+      cabeca: ["./assets/roupas/criativo/bone-criativo-1.jpg", "./assets/roupas/criativo/bone-criativo-2.jpg", "./assets/roupas/criativo/bone-criativo-3.jpg"],
+      superior: ["./assets/roupas/criativo/camiseta-criativo-1.jpg", "./assets/roupas/criativo/camiseta-criativo-2.jpg", "./assets/roupas/criativo/camiseta-criativo-3.jpg"],
+      inferior: ["./assets/roupas/criativo/calca-criativo-1.jpg", "./assets/roupas/criativo/calca-criativo-2.jpg", "./assets/roupas/criativo/calca-criativo-3.jpg"],
+      pes: ["./assets/roupas/criativo/tenis-criativo-1.jpg", "./assets/roupas/criativo/tenis-criativo-2.jpg", "./assets/roupas/criativo/tenis-criativo-3.jpg"]
     },
     "Dramático": {
-      cabeca: [],
-      superior: [],
-      inferior: [],
-      pes: []
+      cabeca: ["./assets/roupas/dramatico/bone-dramatico-1.jpg", "./assets/roupas/dramatico/bone-dramatico-2.jpg", "./assets/roupas/dramatico/bone-dramatico-3.jpg"],
+      superior: ["./assets/roupas/dramatico/camiseta-dramatico-1.jpg", "./assets/roupas/dramatico/camiseta-dramatico-2.jpg", "./assets/roupas/dramatico/camiseta-dramatico-3.jpg"],
+      inferior: ["./assets/roupas/dramatico/calca-dramatico-1.jpg", "./assets/roupas/dramatico/calca-dramatico-2.jpg", "./assets/roupas/dramatico/calca-dramatico-3.jpg"],
+      pes: ["./assets/roupas/dramatico/tenis-dramatico-1.jpg", "./assets/roupas/dramatico/tenis-dramatico-2.jpg", "./assets/roupas/dramatico/tenis-dramatico-3.jpg"]
     }
-  }
+  };
+
+  function gerarOutfitComEstilo() {
+    console.log("=== GERAR OUTFIT INICIADO ===");
+    console.log("Estilo global:", estiloUsuarioGlobal);
+    
+    if (!estiloUsuarioGlobal) {
+        var estiloElemento = document.getElementById('yourStyleSpan');
+        if (estiloElemento) {
+            estiloUsuarioGlobal = estiloElemento.textContent.trim();
+            console.log("Pegou do span:", estiloUsuarioGlobal);
+        }
+    }
+    
+    if (!estiloUsuarioGlobal || estiloUsuarioGlobal === "FAÇA O QUIZ PRIMEIRO!" || 
+        estiloUsuarioGlobal === "ERRO AO CARREGAR") {
+        
+        alert("Você precisa fazer o quiz primeiro!");
+        return;
+    }
+    
+    console.log("Gerando outfit para:", estiloUsuarioGlobal);
+    gerarOutfit(estiloUsuarioGlobal);
+}
+
+function gerarOutfit(estilo) {
+    console.log("Função gerarOutfit chamada com estilo:", estilo);
+    
+    var roupasDoEstilo = outfitsPorEstilo[estilo];
+    
+    if (!roupasDoEstilo) {
+        console.error("ESTILO NÃO ENCONTRADO NO OBJETO!");
+        console.log("Estilos disponíveis:", Object.keys(outfitsPorEstilo));
+        console.log("Estilo procurado:", estilo);
+        
+        for (var key in outfitsPorEstilo) {
+            if (key.toLowerCase().includes(estilo.toLowerCase()) || 
+                estilo.toLowerCase().includes(key.toLowerCase())) {
+                console.log("Encontrou match parcial com:", key);
+                roupasDoEstilo = outfitsPorEstilo[key];
+                break;
+            }
+        }
+        
+        if (!roupasDoEstilo) {
+            console.log("Usando Esportivo como fallback");
+            roupasDoEstilo = outfitsPorEstilo["Esportivo"];
+        }
+    }
+    
+    var container = document.getElementById('outfitDisplay');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    console.log("Arrays disponíveis:", {
+        superior: roupasDoEstilo.superior ? roupasDoEstilo.superior.length : 0,
+        inferior: roupasDoEstilo.inferior ? roupasDoEstilo.inferior.length : 0,
+        pes: roupasDoEstilo.pes ? roupasDoEstilo.pes.length : 0,
+        cabeca: roupasDoEstilo.cabeca ? roupasDoEstilo.cabeca.length : 0
+    });
+    
+    var html = '<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">';
+    
+    if (roupasDoEstilo.superior && roupasDoEstilo.superior.length > 0) {
+        var superiorImg = roupasDoEstilo.superior[Math.floor(Math.random() * roupasDoEstilo.superior.length)];
+        html += `
+            <div style="text-align: center;">
+                <div style="color: #F8F6EB; font-size: 14px; margin-bottom: 5px;">SUPERIOR</div>
+                <img src="${superiorImg}" alt="Superior" style="
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    border: 2px solid #F8F6EB;
+                ">
+            </div>
+        `;
+    }
+    
+    if (roupasDoEstilo.inferior && roupasDoEstilo.inferior.length > 0) {
+        var inferiorImg = roupasDoEstilo.inferior[Math.floor(Math.random() * roupasDoEstilo.inferior.length)];
+        html += `
+            <div style="text-align: center;">
+                <div style="color: #F8F6EB; font-size: 14px; margin-bottom: 5px;">INFERIOR</div>
+                <img src="${inferiorImg}" alt="Inferior" style="
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    border: 2px solid #F8F6EB;
+                ">
+            </div>
+        `;
+    }
+    
+    if (roupasDoEstilo.pes && roupasDoEstilo.pes.length > 0) {
+        var pesImg = roupasDoEstilo.pes[Math.floor(Math.random() * roupasDoEstilo.pes.length)];
+        html += `
+            <div style="text-align: center;">
+                <div style="color: #F8F6EB; font-size: 14px; margin-bottom: 5px;">CALÇADO</div>
+                <img src="${pesImg}" alt="Calçado" style="
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    border: 2px solid #F8F6EB;
+                ">
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    
+    container.innerHTML = html;
+    
+    console.log("Outfit gerado para estilo:", estilo);
+}
+
+window.onload = function () {
+    console.log("=== DASHBOARD INICIANDO ===");
+    console.log("ID Usuário:", sessionStorage.ID_USUARIO);
+    
+    loadChart();
+    
+    loadKPIs();
+  
+    setTimeout(function() {
+        var container = document.getElementById('outfitDisplay');
+        if (container) {
+            container.innerHTML = `
+                <div style="color: #F8F6EB; text-align: center; padding: 15px; font-size: 14px;">
+                    Clique em "GERAR OUTFIT" para criar um look baseado no seu estilo!
+                </div>
+            `;
+        }
+    }, 500);
+};
 </script>

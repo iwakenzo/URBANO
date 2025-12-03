@@ -191,6 +191,16 @@ input#burger:checked ~ label.burger {
 
 }
 
+.background2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homepage2 .background2 img {
+    height: 95vh;
+}
+
 .logo2 .title2 {
     font-family: "Cherry Bomb One", system-ui;
     color: #F8F6EB;

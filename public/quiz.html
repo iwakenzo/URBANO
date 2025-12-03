@@ -37,7 +37,7 @@
                     </label>
                     <div class="offscreenmenu">
                         <ul>
-                            <li><a class="menu_item" href="./quiz.html">QUIZ</a></li>
+                            <li><a class="menu_item" href="./dashboard.html">DASHBOARD</a></li>
                             <li><a class="menu_item" href="./index.html">SAIR</a></li>
                         </ul>
                     </div>
@@ -45,14 +45,14 @@
             </div>
         </div>
     </div>
-    <div id="startQuiz">
-        <button id="btnIniciarQuiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
+    <div id="startQuiz" class="container-quiz">
+        <button id="btnIniciarQuiz" class="button-quiz" onclick="iniciarQuiz()">INICIAR QUIZ</button>
 
         <div id="pontuacao" class="flex-colunar width-fit-content border-primary">
             <div id="finalStyleScore" class="flex-colunar padding-8">
-                <span class="width-fit-content" style="font-size: 20px;">
+                <span class="final-text" style="font-size: 20px;">
                     Seu estilo predominante é: <br>
-                    <span id="spanPontuacaoFinal" style="font-weight: bold; font-size: 30px;">***</span>
+                    <span id="spanPontuacaoFinal" style="font-weight: bold; font-size: 50px;">***</span>
                 </span>
                 <span id="msgFinal" class="width-fit-content">***</span>
             </div>
@@ -61,8 +61,8 @@
         <div id="jogo" class="width-fit-content flex-colunar border-secondary">
 
             <div id="infoQuestao" class="padding-8">
-                <span>Questão atual: <span id="ActualQuestionNumberSpan"></span> de <span id="qtdQuestoes"></span>
-                    questões.</span>
+                <span>QUESTÃO ATUAL: <span id="ActualQuestionNumberSpan"></span> DE <span id="qtdQuestoes"></span>
+                    QUESTÕES.</span class="title">
             </div>
 
             <div id="perguntaDaQuestaoAtual" class="padding-8">
@@ -70,7 +70,7 @@
             </div>
 
             <div id="infoAlternativas" class="padding-8">
-                <span><em>Escolha uma opção dentre as abaixo:</em></span>
+                <span><em>ESCOLHA A OPÇÃO QUE MAIS TE REPRESENTE:</em></span>
             </div>
 
             <div id="opcoes" class="flex-colunar padding-8">
@@ -96,11 +96,10 @@
                 </span>
             </div>
 
-            <div id="botoes" class="flex-colunar padding-8">
-                <button onclick="submit()" id="btnSubmit">submit resposta</button>
-                <button onclick="avancar()" id="btnProx" disabled>Avançar para próxima questão</button>
-                <!-- <button onclick="finalizar()" id="btnConcluir" disabled>Finalizar Quiz</button> -->
-                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled>Tentar novamente</button>
+            <div id="botoes" class="flex-colunar padding-8 buttons">
+                <button onclick="submit()" id="btnSubmit" class="button">CONFIRMAR RESPOSTA</button>
+                <button onclick="avancar()" id="btnProx" disabled class="button">AVANÇAR</button>
+                <button onclick="tentarNovamente()" id="btnTentarNovamente" disabled class="button">TENTAR NOVAMENTE</button>
             </div>
 
         </div>
@@ -121,93 +120,93 @@
     var listaDeQuestoes = [
 
         {
-            pergunta: "1. O que é indispensável em uma peça de roupa para você?",
-            alternativaA: "Conforto absoluto e praticidade.",
-            alternativaB: "Qualidade impecável, durabilidade e bom acabamento.",
-            alternativaC: "Suavidade, leveza e detalhes delicados.",
-            alternativaD: "Impacto visual, força e um corte que transmita confiança.",
-            alternativaE: "Originalidade; algo que represente o meu mood do dia."
+            pergunta: "1. O QUE É INDISPENSÁVEL EM UMA PEÇA DE ROUPA PARA VOCÊ?",
+            alternativaA: "CONFORTO ABSOLUTO E PRATICIDADE.",
+            alternativaB: "QUALIDADE IMPECÁVEL, DURABILIDADE E BOM ACABAMENTO.",
+            alternativaC: "SUAVIDADE, LEVEZA E DETALHES DELICADOS.",
+            alternativaD: "IMPACTO VISUAL, FORÇA E UM CORTE QUE TRANSMITA CONFIANÇA",
+            alternativaE: "ORIGINALIDADE; ALGO QUE REPRESENTE O MEU MOOD DO DIA."
         },
 
         {
-            pergunta: "2. Qual paleta de cores domina o seu guarda-roupa?",
-            alternativaA: "Cores neutras e naturais (branco, cinza, bege, azul-marinho).",
-            alternativaB: "Cores sóbrias, discretas e fechadas.",
-            alternativaC: "Tons pastéis e cores claras/suaves.",
-            alternativaD: "Cores intensas, fortes e contrastantes.",
-            alternativaE: "Uma mistura livre de cores vibrantes e combinações inusitadas."
+            pergunta: "2. QUAL PALETA DE CORES DOMINA O SEU GUARDA-ROUPA?",
+            alternativaA: "CORES NEUTRAS E NATURAIS (BRANCO, CINZA, BEGE, AZUL-MARINHO).",
+            alternativaB: "CORES SÓBRIAS, DISCRETAS E FECHADAS.",
+            alternativaC: "TONS PASTÉIS E CORES CLARAS/SUAVES.",
+            alternativaD: "CORES INTENSAS, FORTES E CONTRASTANTES.",
+            alternativaE: "UMA MISTURA LIVRE DE CORES VIBRANTES E COMBINAÇÕES INUSITADAS."
         },
 
         {
-            pergunta: "3. Quando o assunto é sapatos, o que você escolhe para o dia a dia?",
-            alternativaA: "Tênis, calçados planos e anatômicos.",
-            alternativaB: "Mocassins, sapatos clássicos de couro ou bico fechado.",
-            alternativaC: "Sapatilhas delicadas ou modelos discretos.",
-            alternativaD: "Botas de verniz, sapatos de design arrojado ou saltos imponentes.",
-            alternativaE: "Sapatos com designs artísticos, coloridos ou com formatos diferentes."
+            pergunta: "3. QUANDO O ASSUNTO É SAPATOS, O QUE VOCÊ ESCOLHE PARA O DIA A DIA?",
+            alternativaA: "TÊNIS, CALÇADOS PLANOS E ANATÔMICOS.",
+            alternativaB: "MOCASSINS, SAPATOS CLÁSSICOS DE COURO OU BICO FECHADO.",
+            alternativaC: "SAPATILHAS DELICADAS OU MODELOS DISCRETOS.",
+            alternativaD: "BOTAS DE VERNIZ, SAPATOS DE DESIGN ARROJADO OU SALTOS IMPONENTES.",
+            alternativaE: "SAPATOS COM DESIGNS ARTÍSTICOS, COLORIDOS OU COM FORMATOS DIFERENTES."
         },
 
         {
-            pergunta: "4. Como você lida com o seu cabelo e cuidados com o rosto?",
-            alternativaA: "Praticidade total: visual natural e fácil de manter.",
-            alternativaB: "Impecável: sempre alinhado e com corte em dia.",
-            alternativaC: "Suave: visual leve e com movimento natural.",
-            alternativaD: "Marcante: cortes modernos ou visual de impacto.",
-            alternativaE: "Original: gosto de mudar, usar cores ou acessórios."
+            pergunta: "4. COMO VOCÊ LIDA COM O SEU CABELO E CUIDADOS COM O ROSTO?",
+            alternativaA: "PRATICIDADE TOTAL: VISUAL NATURAL E FÁCIL DE MANTER.",
+            alternativaB: "IMPECÁVEL: SEMPRE ALINHADO E COM CORTE EM DIA.",
+            alternativaC: "SUAVE: VISUAL LEVE E COM MOVIMENTO NATURAL.",
+            alternativaD: "MARCANTE: CORTES MODERNOS OU VISUAL DE IMPACTO.",
+            alternativaE: "ORIGINAL: GOSTO DE MUDAR, USAR CORES OU ACESSÓRIOS."
         },
 
         {
-            pergunta: "5. Qual destes acessórios ou complementos não pode faltar?",
-            alternativaA: "Mochila funcional, smartwatch ou itens práticos.",
-            alternativaB: "Relógio clássico, cinto de couro ou itens de marca discreta.",
-            alternativaC: "Acessórios sutis, com significado pessoal ou design leve.",
-            alternativaD: "Óculos grandes, metais pesados ou itens que chamem atenção.",
-            alternativaE: "Peças artesanais, vintage ou com design artístico."
+            pergunta: "5. QUAL DESTES ACESSÓRIOS OU COMPLEMENTOS NÃO PODE FALTAR?",
+            alternativaA: "MOCHILA FUNCIONAL, SMARTWATCH OU ITENS PRÁTICOS.",
+            alternativaB: "RELÓGIO CLÁSSICO, CINTO DE COURO OU ITENS DE MARCA DISCRETA.",
+            alternativaC: "ACESSÓRIOS SUTIS, COM SIGNIFICADO PESSOAL OU DESIGN LEVE.",
+            alternativaD: "ÓCULOS GRANDES, METAIS PESADOS OU ITENS QUE CHAMEM ATENÇÃO.",
+            alternativaE: "PEÇAS ARTESANAIS, VINTAGE OU COM DESIGN ARTÍSTICO."
         },
 
         {
-            pergunta: "6. Se você fosse convidado para um evento social importante, o que vestiria?",
-            alternativaA: "Algo que não me aperte e me deixe à vontade.",
-            alternativaB: "Alfaiataria impecável (terno ou blazer) bem cortada e alinhada.",
-            alternativaC: "Tecidos leves, cores suaves e caimento fluido.",
-            alternativaD: "Visual estruturado, cores escuras ou cortes modernos de impacto.",
-            alternativaE: "Uma combinação ousada de peças ou um design inovador."
+            pergunta: "6. SE VOCÊ FOSSE CONVIDADO PARA UM EVENTO SOCIAL IMPORTANTE, O QUE VESTIRIA?",
+            alternativaA: "ALGO QUE NÃO ME APERTE E ME DEIXE À VONTADE.",
+            alternativaB: "ALFAIATARIA IMPECÁVEL (TERNO OU BLAZER) BEM CORTADA E ALINHADA.",
+            alternativaC: "TECIDOS LEVES, CORES SUAVES E CAIMENTO FLUIDO.",
+            alternativaD: "VISUAL ESTRUTURADO, CORES ESCURAS OU CORTES MODERNOS DE IMPACTO.",
+            alternativaE: "UMA COMBINAÇÃO OUSADA DE PEÇAS OU UM DESIGN INOVADOR."
         },
 
         {
-            pergunta: "7. O que você prefere em relação a estampas e texturas?",
-            alternativaA: "Prefiro lisos ou listras simples e casuais.",
-            alternativaB: "Gosto das clássicas: xadrez discreto ou risca de giz.",
-            alternativaC: "Estampas pequenas, discretas ou texturas suaves ao toque.",
-            alternativaD: "Alto contraste, formas geométricas grandes ou texturas marcantes.",
-            alternativaE: "Mix de estampas, gráficos artísticos ou étnicos."
+            pergunta: "7. O QUE VOCÊ PREFERE EM RELAÇÃO A ESTAMPAS E TEXTURAS?",
+            alternativaA: "PREFIRO LISOS OU LISTRAS SIMPLES E CASUAIS.",
+            alternativaB: "GOSTO DAS CLÁSSICAS: XADREZ DISCRETO OU RISCA DE GIZ.",
+            alternativaC: "ESTAMPAS PEQUENAS, DISCRETAS OU TEXTURAS SUAVES AO TOQUE.",
+            alternativaD: "ALTO CONTRASTE, FORMAS GEOMÉTRICAS GRANDES OU TEXTURAS MARCANTES.",
+            alternativaE: "MIX DE ESTAMPAS, GRÁFICOS ARTÍSTICOS OU ÉTNICOS."
         },
 
         {
-            pergunta: "8. Qual mensagem você quer passar com sua imagem?",
-            alternativaA: "Sou acessível, descomplicado e leve.",
-            alternativaB: "Sou profissional, confiável e sério.",
-            alternativaC: "Sou empático, calmo e acolhedor.",
-            alternativaD: "Sou forte, intenso e autoconfiante.",
-            alternativaE: "Sou criativo, livre e tenho personalidade única."
+            pergunta: "8. QUAL MENSAGEM VOCÊ QUER PASSAR COM SUA IMAGEM?",
+            alternativaA: "SOU ACESSÍVEL, DESCOMPLICADO E LEVE.",
+            alternativaB: "SOU PROFISSIONAL, CONFIÁVEL E SÉRIO.",
+            alternativaC: "SOU EMPÁTICO, CALMO E ACOLHEDOR.",
+            alternativaD: "SOU FORTE, INTENSO E AUTOCONFIANTE.",
+            alternativaE: "SOU CRIATIVO, LIVRE E TENHO PERSONALIDADE ÚNICA."
         },
 
         {
-            pergunta: "9. O que mais te incomoda em um visual?",
-            alternativaA: "Roupas apertadas, tecidos rígidos ou que pinicam.",
-            alternativaB: "Parecer desleixado ou usar algo com acabamento ruim.",
-            alternativaC: "Visuais muito agressivos, pesados ou frios.",
-            alternativaD: "Passar despercebido ou parecer sem sal na multidão.",
-            alternativaE: "Estar vestido igual a todo mundo (uniformizado)."
+            pergunta: "9. O QUE MAIS TE INCOMODA EM UM VISUAL?",
+            alternativaA: "ROUPAS APERTADAS, TECIDOS RÍGIDOS OU QUE PINICAM.",
+            alternativaB: "PARECER DESLEIXADO OU USAR ALGO COM ACABAMENTO RUIM.",
+            alternativaC: "VISUAIS MUITO AGRESSIVOS, PESADOS OU FRIOS.",
+            alternativaD: "PASSAR DESPERCEBIDO OU PARECER SEM SAL NA MULTIDÃO.",
+            alternativaE: "ESTAR VESTIDO IGUAL A TODO MUNDO (UNIFORMIZADO)."
         },
 
         {
-            pergunta: "10. O que define sua decisão de compra?",
-            alternativaA: "Funcionalidade: serve para várias coisas e é confortável?",
-            alternativaB: "Custo-benefício: é uma peça durável que vale o investimento?",
-            alternativaC: "Conexão: a peça me traz uma sensação boa e acolhedora?",
-            alternativaD: "Poder: a peça me faz sentir mais confiante e forte?",
-            alternativaE: "Exclusividade: é algo diferente que ninguém tem igual?"
+            pergunta: "10. O QUE DEFINE SUA DECISÃO DE COMPRA?",
+            alternativaA: "FUNCIONALIDADE: SERVE PARA VÁRIAS COISAS E É CONFORTÁVEL?",
+            alternativaB: "CUSTO-BENEFÍCIO: É UMA PEÇA DURÁVEL QUE VALE O INVESTIMENTO?",
+            alternativaC: "CONEXÃO: A PEÇA ME TRAZ UMA SENSAÇÃO BOA E ACOLHEDORA?",
+            alternativaD: "PODER: A PEÇA ME FAZ SENTIR MAIS CONFIANTE E FORTE?",
+            alternativaE: "EXCLUSIVIDADE: É ALGO DIFERENTE QUE NINGUÉM TEM IGUAL?"
         }
     ]
 
@@ -311,9 +310,9 @@
     }
 
     function sumPoints() {
-        var options = document.getElementsByName("option"); // recupera alternativas no html
+        var options = document.getElementsByName("option");
 
-        var valorEscolhido = "" // variável para armazenar a alternativa correta
+        var valorEscolhido = ""
 
         for (var option of options) {
             if (option.checked) {
@@ -361,7 +360,7 @@
         }
 
         document.getElementById('spanPontuacaoFinal').innerHTML = estiloVencedor
-        document.getElementById('msgFinal').innerHTML = "Esse estilo combina com sua personalidade!";
+        document.getElementById('msgFinal').innerHTML = `<span>ESSE ESTILO COMBINA COM SUA PERSONALIDADE!</span>`;
         document.getElementById('btnTentarNovamente').disabled = false
 
         saveResults(estiloVencedor);
