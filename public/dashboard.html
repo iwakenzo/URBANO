@@ -302,7 +302,7 @@ function gerarOutfit(estilo) {
         }
         
         if (!roupasDoEstilo) {
-            console.log("Usando Esportivo como fallback");
+            console.log("Usando Esportivo em caso de falha");
             roupasDoEstilo = outfitsPorEstilo["Esportivo"];
         }
     }
@@ -320,6 +320,22 @@ function gerarOutfit(estilo) {
     });
     
     var html = '<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">';
+    
+    if (roupasDoEstilo.cabeca && roupasDoEstilo.cabeca.length > 0) {
+      var cabecaImg = roupasDoEstilo.cabeca[Math.floor(Math.random() * roupasDoEstilo.cabeca.length)];
+      html += `
+          <div style="text-align: center;">
+                <div style="color: #F8F6EB; font-size: 14px; margin-bottom: 5px;">CABEÇA</div>
+                <img src="${cabecaImg}" alt="Cabeça" style="
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    border: 2px solid #F8F6EB;
+                ">
+            </div>
+      `;
+    }
     
     if (roupasDoEstilo.superior && roupasDoEstilo.superior.length > 0) {
         var superiorImg = roupasDoEstilo.superior[Math.floor(Math.random() * roupasDoEstilo.superior.length)];
